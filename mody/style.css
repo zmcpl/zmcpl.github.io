@@ -1,0 +1,59 @@
+body {
+    background-image: url(bgphoto.png);
+    height: 100%;
+    font-family: Noto Sans;
+    font-weight: 600;
+}
+
+#-calosc- {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    animation: wejscie 0.5s ease-in-out;
+}
+
+@keyframes wejscie {
+    0% {
+            transform: translateX(-150%);
+    }
+    100% {
+            transform: translateX(0);
+    }
+}
+
+#-header- {
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#-main- {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#-footer- {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#text-- {
+    animation: soon 5s infinite;
+}
+
+@keyframes soon {
+    0% {     transform: translateX(0%);}
+    25% {   transform: translateX(50%);}
+    50% {   transform: translateX(90%);}
+    75% {   transform: translateX(50%);}
+    100% {  transform: translateX(0%);}
+}
