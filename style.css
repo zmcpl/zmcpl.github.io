@@ -18,11 +18,6 @@ body {
     border-radius: 5px;
 }
 
-#zamknij {
-    background-color: red;
-    border: 0px solid lightcoral;
-}
-
 @keyframes informacja {
     0% {    transform: translateX(-100%);}
     10% {  transform: translateX(0%);}
