@@ -5,6 +5,31 @@ body {
     font-weight: 600;
 }
 
+#popup {
+    animation: informacja 5s ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#zamknij {
+    background-color: red;
+    border: 0px solid lightcoral;
+}
+
+@keyframes informacja {
+    0% {    transform: translateX(-100%);}
+    10% {  transform: translateX(0%);}
+    75% {   opacity: 1;}
+    100% {  opacity: 0;}
+}
+
 #-calosc- {
     width: 70%;
     margin-left: auto;
