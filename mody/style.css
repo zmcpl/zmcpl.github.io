@@ -89,9 +89,9 @@ a {
 
 @keyframes soon {
     0% {     transform: translateX(0%);}
-    25% {   transform: translateX(50%);}
-    50% {   transform: translateX(70%);}
-    75% {   transform: translateX(50%);}
+    25% {   transform: translateX(30%);}
+    50% {   transform: translateX(60%);}
+    75% {   transform: translateX(30%);}
     100% {  transform: translateX(0%);}
 }
 }
