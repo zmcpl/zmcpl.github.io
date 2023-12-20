@@ -197,7 +197,7 @@
         }
     
         function podkladka(total) {
-            var wynik = total / czasInput.value;
+            var wynik = total / czasInput.value / botyInput.value;
             przyblizenieDiv.innerHTML = wynik.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
     
