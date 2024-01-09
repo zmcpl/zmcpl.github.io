@@ -207,35 +207,6 @@ h1 {
     border-radius: 20px;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 460px;
-    height: 400px;
-    max-width: 460px;
-    background: rgba(0, 0, 0, 0.5); /* Dostosuj ostatnią wartość, aby kontrolować ciemność */
-    display: flex;
-    transform: translateX(91.3%);
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    border-radius: 20px; /* Dodaj zaokrąglenie, aby równo pokrywało z obrazkiem */
-    box-sizing: border-box; /* Zapobiega dodawaniu marginesów do całkowitego rozmiaru elementu */ 
-}
-
-.overlay:hover {
-    opacity: 1;
-}
-
-.text {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-}
-
 .u-log {
     display: block;
     width: 100%;
@@ -438,34 +409,6 @@ h1 {
     width: 300px;
     height: 300px;
     border-radius: 20px;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 300px;
-    max-width: 300px;
-    background: rgba(0, 0, 0, 0.5); /* Dostosuj ostatnią wartość, aby kontrolować ciemność */
-    display: flex;
-    transform: translateX(2px);
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    border-radius: 20px; /* Dodaj zaokrąglenie, aby równo pokrywało z obrazkiem */
-    box-sizing: border-box; /* Zapobiega dodawaniu marginesów do całkowitego rozmiaru elementu */ 
-}
-
-.overlay:hover {
-    opacity: 1;
-}
-.text {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
 }
 
 .u-log {
