@@ -250,38 +250,10 @@ h1 {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap');  
 
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(61, 61, 61);
     overflow-y: scroll;
     overflow-x: hidden;
-    height: fit-content;
-    background-image: url(/photos/body-bg.webp);
-    background-repeat: repeat-y;
-    background-position: center;
-    background-size: 100%;
-    background-position-y: 0;
-}
-
-#informacja {
-    position: fixed;
-    z-index: 999;
-    background-color: white;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    border-radius: 20px;
-    border: 10px solid rgba(124, 124, 124, 0.274);
-    padding: 20px;
-    transition: all 0.5s ease-in-out;
-    display: none;
-}
-
-#elements {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: fit-content /* This might cause an issue as well, depending on your content */
 }
 
 header {
@@ -292,10 +264,8 @@ header {
     height: 100px;
     position: fixed;
     top: 5px;
-    left: 5px;
-    right: 5px;
+    left: 0px;
     padding-left: 150px;
-    border-radius: 20px;
     font-family: Adumu;
     color: rgba(255, 255, 255, 0);
     font-size: 15px;
@@ -316,10 +286,9 @@ nav {
     position: relative;
     display: flex;
     justify-content: space-evenly;
-    top: 110px;
-    left: 2px;
-    right: 5px;
+    top: 110px;;
     flex-wrap: wrap;
+    left: 0;
 }
 
 nav a {
@@ -330,7 +299,7 @@ nav a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 500px;
-    background-position-x: 2-px;
+    background-position-x: 2px;
     border-radius: 10px;
     margin-top: 5px;
 }
@@ -340,9 +309,8 @@ nav span {
     align-items: center;
     justify-content: end;
     border: 1px dashed black;
-    padding-right: 20px;
     border-radius: 10px;
-    width: 440px;
+    width: 320px;
     height: 100px;
 }
 
@@ -467,8 +435,8 @@ h1 {
 }
 
 #owner-image img {
-    width: 360px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     border-radius: 20px;
 }
 
@@ -476,12 +444,12 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 360px;
-    height: 350px;
-    max-width: 360px;
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
     background: rgba(0, 0, 0, 0.5); /* Dostosuj ostatnią wartość, aby kontrolować ciemność */
     display: flex;
-    transform: translateX(15.8px);
+    transform: translateX(2px);
     align-items: center;
     justify-content: center;
     opacity: 0;
