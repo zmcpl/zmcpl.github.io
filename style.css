@@ -249,6 +249,13 @@ footer span a {
 }
 
 @media (max-width: 623px) {
+    body {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+    }
+
     #donation-goal {
         position: absolute;
         visibility: hidden;
