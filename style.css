@@ -10,6 +10,7 @@ body {
     background-position-y: 0;
     background-size: 120%;
     overflow-x: hidden;
+    background-size: cover;
 }
 
 header {
@@ -26,14 +27,14 @@ header {
 header span {
     display: block;
     color: white;
+    
 }
 
 #domain-name {
-    color: black;
+    color: rgb(255, 255, 255);
     font-family: Noto Sans;
     font-weight: bolder;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     margin-left: 15px;
 }
@@ -50,7 +51,6 @@ header a {
     font-weight: bolder;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 #donation-goal {
@@ -171,7 +171,9 @@ main {
 
 #loading-text {
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
+    font-family: Fredoka;
+    font-size: 30px;
     margin-top: 10px;
 }
 
@@ -224,5 +226,17 @@ main {
     #domain-name,
     #links-help a {
         padding: 16px;
+    }
+
+    #domain-name {
+        padding: 0px;
+    }
+    
+    #loading-text {
+        text-align: center;
+    }
+
+    header a {
+        white-space: normal;
     }
 }
