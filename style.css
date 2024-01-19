@@ -157,6 +157,7 @@ main {
     background-color: #ddd;
     overflow: hidden;
     position: relative;
+    border-radius: 20px;
 }
 
 #loading-progress {
@@ -167,6 +168,7 @@ main {
     top: 0;
     left: 0;
     transition: width 2s ease-in-out;
+    border-radius: 20px;
 }
 
 #loading-text {
