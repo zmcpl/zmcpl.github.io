@@ -200,12 +200,12 @@ footer span {
     display: flex;
 }
 
-footer img {
+footer span img {
     width: 30px;
     margin-inline: 5px;
 }
 
-footer a {
+footer span a {
     font-family: Fredoka;
     color: white;
     text-decoration: none;
