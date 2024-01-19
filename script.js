@@ -64,7 +64,6 @@ var petSimulatorTexteng = `
 
     if (selectedValue === "jezyk-polski") {
         links[0].innerText = "O Nas";
-        links[1].innerText = "Jak to działa";
         document.getElementById('d-goal').textContent = "PS99 Cel Donate";
         document.getElementById('goal').textContent = "2,500 / 200,000 gemów";
         document.getElementById('n-block-one').textContent = "Rynek";
@@ -75,7 +74,6 @@ var petSimulatorTexteng = `
         }
         else if (selectedValue === "jezyk-angielski") {
         links[0].innerText = "About Us";
-        links[1].innerText = "How it's work";
         document.getElementById('d-goal').textContent = "PS99 Donation Goal";
         document.getElementById('goal').textContent = "2,500 / 200,000 gems";
         document.getElementById('n-block-one').textContent = "Market";
