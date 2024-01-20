@@ -7,7 +7,7 @@ function changeLanguage() {
 
     var petSimulatorTextpl = `
     <span>
-        Witaj na <b>Crux Market</b> - Twoim jednostopniowym przystanku dla fascynującej przygody w świecie Pet Simulator 99!
+        Witaj na <b>zmcpl.github.io</b> - Twoim jednostopniowym przystanku dla fascynującej przygody w świecie Pet Simulator 99!
 
         <h2>🐾 Odkryj Magię Pet Simulator 99:</h2>
         Zanurz się w fantastycznym świecie, gdzie marzenia o posiadanym wymarzonym zwierzaku stają się rzeczywistością.<br> 
@@ -35,7 +35,7 @@ function changeLanguage() {
 
 var petSimulatorTexteng = `
     <span>
-        Welcome to <b>Crux Market</b> - Your one-stop destination for an exciting adventure in the world of Pet Simulator 99!
+        Welcome to <b>zmcpl.github.io</b> - Your one-stop destination for an exciting adventure in the world of Pet Simulator 99!
 
         <h2>🐾 Discover the Magic of Pet Simulator 99:</h2>
         Immerse yourself in a fantastic world where dreams of owning your ideal pet become a reality. <br> 
@@ -70,7 +70,7 @@ var petSimulatorTexteng = `
         document.getElementById('n-block-two').textContent = "Jak zarabiać dużo gemów";
         document.getElementById('n-block-three').textContent = "Nowości w Pet Simulator 99";
         document.getElementById('petSimulatorText').innerHTML = petSimulatorTextpl;
-        document.getElementById('loading-text').textContent = "Ładowanie strony crux-market.ovh";
+        document.getElementById('loading-text').textContent = "Ładowanie strony zmcpl.github.io";
         }
         else if (selectedValue === "jezyk-angielski") {
         links[0].innerText = "About Us";
