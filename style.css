@@ -1,0 +1,234 @@
+* {
+    font-family: Fredoka;
+    font-weight: 300;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, rgb(255, 0, 0), rgb(195, 0, 255), blue);
+  overflow-x: hidden;
+}
+
+header {
+    padding: 35px 60px;
+    font-size: 20px;
+    background-image: url(pet-simulator-99-values.jpg);
+    background-position: center;
+    background-size: cover;
+    background-position-y: center;
+    box-shadow: 0rem 0.2rem 2rem black;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.527);
+    padding: 35px 60px;
+    border-radius: 10px;
+    border: 1px solid lightseagreen;
+    box-shadow: 0rem 0rem 2rem navy;
+}
+
+nav span {
+    margin-inline: 5px;
+}
+
+nav a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+#langselector {
+    font-size: 23px;
+    background-color: rgba(255, 255, 255, 0.521);
+    border: 0;
+    color: black;
+    border-radius: 5px;
+}
+
+footer {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0rem -0.2rem 2rem black;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer span img {
+    width: 50px;
+    background-color: #ffffff80;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 500ms ease-in-out;
+}
+
+footer span img:hover {
+    background-color: #ffffff;
+}
+
+#B1 {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+#B2 {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+#B2 p {
+    opacity: 0.8;
+}
+
+#L1 {
+  border-bottom: 2px solid white;
+}
+
+#L2,
+#L3,
+#L4 {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none; /* Usunięcie domyślnego podkreślenia dla linków */
+    color: inherit; /* Dziedziczenie koloru tekstu od rodzica */
+    padding-bottom: 5px;
+}
+
+#L2::before,
+#L3::before,
+#L4::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; /* Wysokość border-bottom */
+    background-color: white; /* Kolor border-bottom */
+    transition: width 0.3s; /* Animacja tylko dla szerokości */
+}
+
+#L2:hover::before,
+#L3:hover::before,
+#L4:hover::before {
+    width: 100%;
+}
+
+
+#konkurs {
+  width: 220px;
+  height: 300px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid navy;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0rem 0rem 2rem navy;
+  animation: box 10s infinite;
+  line-height: 25px;
+}
+
+#informacje-o-stronie {
+  flex: 1;
+  height: 500px;
+  border: 1px solid navy;
+  box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 128, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  margin-left: 20px;
+  float: left;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+
+main {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px; 
+  display: flex; 
+  flex-wrap: wrap; 
+}
+
+main > div {
+  margin-bottom: 20px; 
+}
+
+
+#konkurs a {
+    text-decoration: none;
+    color: white;
+}
+
+@keyframes box {
+    0% {
+      box-shadow: 0rem 0rem 2rem rgba(255, 0, 0, 0.7);
+    }
+    25% {
+      box-shadow: 0rem 0rem 2rem rgba(255, 255, 0, 0.7);
+    }
+    50% {
+      box-shadow: 0rem 0rem 2rem rgba(0, 0, 255, 0.7);
+    }
+    75% {
+      box-shadow: 0rem 0rem 2rem rgba(0, 255, 0, 0.7);
+    }
+    100% {
+      box-shadow: 0rem 0rem 2rem rgba(255, 0, 0, 0.7);
+    }
+  }
+  
+#K1 {
+    font-size: 25px;
+    animation: colorful 4s infinite;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.363);
+}
+
+@keyframes colorful {
+    0% {
+      color: red;
+    }
+    25% {
+      color: yellow;
+    }
+    50% {
+      color: blue;
+    }
+    75% {
+      color: green;
+    }
+    100% {
+      color: red;
+    }
+  }
+  
+#K5 {
+    background-color: rgb(64, 168, 134);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#K6 {
+    animation: colorful 7s infinite;
+}
+
+#countdown {
+    border-top: 2px solid rgba(0, 0, 0, 0.363);
+    margin-top: 10px;
+}
+
+#I1 {
+  font-size: 25px;
+}
+
