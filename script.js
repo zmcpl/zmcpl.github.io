@@ -7,7 +7,7 @@ function langselect() {
       document.getElementById('L1').textContent = "O nas";
       document.getElementById('L2').textContent = "Rynek";
       document.getElementById('L3').textContent = "Wartość petów";
-      document.getElementById('L4').textContent = "Social";
+      document.getElementById('L4').textContent = "Moja Gra";
       document.getElementById('K1').textContent = "KONKURS";
       document.getElementById('K2').textContent = "Do wygrania:";
       document.getElementById('K3').textContent = "1000x RB Potion Poodle";
@@ -33,7 +33,7 @@ function langselect() {
       document.getElementById('L1').textContent = "About Us";
       document.getElementById('L2').textContent = "Market";
       document.getElementById('L3').textContent = "Pet Value";
-      document.getElementById('L4').textContent = "Social";
+      document.getElementById('L4').textContent = "My Game";
       document.getElementById('K1').textContent = "GIVEAWAY";
       document.getElementById('K2').textContent = "To win:";
       document.getElementById('K3').textContent = "1000x RB Potion Poodle";
