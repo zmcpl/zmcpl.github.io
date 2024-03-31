@@ -126,3 +126,20 @@ header {
 #colorfull {
     animation: kolorki 5s infinite;
 }
+
+#four_text {
+    text-align: center;
+}
+
+#four_img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+}
+
+#four_img img {
+    width: 80%;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem black;
+}
