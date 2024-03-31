@@ -1,0 +1,143 @@
+* {
+    position: relative;
+}
+
+body {
+    width: 90%;
+    margin: auto;
+    font-family: Noto Sans;
+    background-image: url(9112b576009313.5c5ca8e8c45c3.jpg);
+    background-size: 2270px;
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    height: 150px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(45deg, rgba(255, 217, 0, 0.5), rgba(0, 0, 0, 0.5));
+    color: white;
+    font-size: 35px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 0 0 2rem black;
+}
+
+#img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#img img {
+    width: 60%;
+    transform: rotate(90deg);
+    box-shadow: 0 0 2rem black;
+    border-radius: 1rem;
+}
+
+#important_one {
+    display: flex;
+    align-items: center;
+    transform: translateX(-60px) translateY(-100px);
+}
+
+#img_dwa img {
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem black;
+}
+
+#important_two {
+    z-index: 999;
+    transform: translateY(-100px);
+}
+
+#two_text {
+    text-align: center;
+}
+
+#two_img {
+    display: flex;
+    justify-content: space-between;
+}
+
+#two_img span {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#two_img span h2 {
+    text-align: center;
+    animation: kolorki 5s infinite;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 2px solid white;
+}
+
+#two_img img{
+    height: 250px;
+    border-radius: 1rem;
+}
+
+@keyframes kolorki {
+    0% {
+        color: green;
+    }
+
+    25% {
+        color: yellow;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    75% {
+        color: red;
+    }
+
+    100% {
+        color: green;
+    }
+}
+
+#three_img {
+    display: flex;
+}
+
+#three_img img {
+    height: 440px;
+}
+
+#three_text {
+    text-align: center;
+}
+
+#colorfull {
+    animation: kolorki 5s infinite;
+}
+
+#four_text {
+    text-align: center;
+}
+
+#four_img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+}
+
+#four_img img {
+    width: 80%;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem black;
+}
