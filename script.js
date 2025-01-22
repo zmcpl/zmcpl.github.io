@@ -1,55 +1,53 @@
-const serverData = {
-    "ip": "49.13.3.248",
-    "port": 25565,
-    "debug": {
-      "ping": false,
-      "query": false,
-      "srv": false,
-      "querymismatch": false,
-      "ipinsrv": false,
-      "cnameinsrv": false,
-      "animatedmotd": false,
-      "cachehit": false,
-      "cachetime": 1707271376,
-      "cacheexpire": 1707271436,
-      "apiversion": 3,
-      "error": {
-        "ping": "No address to query.",
-        "query": "Could not create socket: php_network_getaddresses: getaddrinfo for  failed: Name or service not known"
+function fetchActivePlayers() {
+  const apiUrl = "https://api.mcsrvstat.us/3/craftmc.pl";
+
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    },
-    "online": false
-  };
+      return response.json();
+    })
+    .then(data => {
+      const graczeElement = document.getElementById("gracze-online");
 
-  function fetchActivePlayers() {
-    const apiUrl = `https://api.mcsrvstat.us/2/${serverData.ip}:${serverData.port}`;
+      if (!graczeElement) {
+        console.error("Brakuje elementu o ID 'gracze-online' w HTML.");
+        return;
+      }
 
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.online) {
-          document.getElementById('gracze-online').textContent = ` ${data.players.online}`;
-        } else {
-          document.getElementById('gracze-online').textContent = 'Serwer jest offline';
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching server status:', error);
-        document.getElementById('activePlayers').textContent = 'Error fetching server status';
-      });
-  }
+      if (data.online) {
+        const liczbaGraczy = data.players?.online ?? 0;
+        graczeElement.textContent = `${liczbaGraczy}`;
+      } else {
+        graczeElement.textContent = "Serwer jest offline";
+      }
+    })
+    .catch(error => {
+      console.error("Błąd podczas pobierania statusu serwera:", error);
+      const graczeElement = document.getElementById("gracze-online");
+      if (graczeElement) {
+        graczeElement.textContent = "Błąd podczas pobierania statusu serwera";
+      }
+    });
+}
 
-  fetchActivePlayers();
+// Pierwsze wywołanie funkcji
+fetchActivePlayers();
 
-  setInterval(fetchActivePlayers, 1000);
-
+// Regularne aktualizowanie statusu co 10 sekund
+setInterval(fetchActivePlayers, 60000);
 
 function otworz() {
-    var widoczny = document.getElementById('nav');
+  const widoczny = document.getElementById('nav');
+  if (widoczny) {
     widoczny.style.transform = 'translateX(5%)';
+  }
 }
 
 function zamknij() {
-    var tak = document.getElementById('nav');
+  const tak = document.getElementById('nav');
+  if (tak) {
     tak.style.transform = 'translateX(-100%)';
+  }
 }
