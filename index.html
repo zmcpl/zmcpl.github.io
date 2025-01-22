@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craftmc.pl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="script.js"></script>
+
+    <header>
+        <div id="main-picture">
+            <a href="index.html"><img src="grafika/h0kxnZc.png" alt="craftmc.pl"></a>
+        </div>
+        <div id="navbar">
+            <a href="regulamin/index.html"><span class="regulamin">
+                REGULAMIN
+            </span></a>
+            <a href="Płatności/index.html"><span class="platnosci">
+                PŁATNOŚCI
+            </span></a>
+            <a href="SocialMedia/index.html" ><span class="social-media">
+                SOCIAL MEDIA
+            </span></a>
+            <button onclick="otworz()" id="menu-nav">Menu</button>
+        </div>
+    </header>
+
+    <nav id="nav">
+        <a href="regulamin/index.html">
+            <span>REGULAMIN</span>
+        </a>
+        <a href="Płatności/index.html"><span>
+            PŁATNOŚCI
+        </span></a>
+        <a href="SocialMedia/index.html"><span>
+            SOCIAL MEDIA
+        </span></a>
+        <span>
+            <button onclick="zamknij()">Zamknij</button>
+        </span>
+    </nav>
+
+
+        <div id="open">
+            <div id="M1">
+                <img src="grafika/body.png" alt="kawa.png">
+            </div>
+            <div id="M2">
+                <h1>Witaj użytkowniku na serwerze Craftmc.pl</h1>
+                Aktywni gracze : <span id="gracze-online"></span>
+            </div>
+        </div>
+
+    <main>
+
+        <div id="select-gamemode">
+            WYBIERZ SERWER
+        </div>
+        <div id="container">
+            
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Survival + Gildie
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/1RfAiPq.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    Survival + Gildie              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu SkyBlock 1.12.2
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/Ro5fFMS.png" alt="">
+                                <div id="tryb-nazwa">
+                                    SkyBlock 1.12.2              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu CaveBlock 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/YYwngiA.png" alt="">
+                                <div id="tryb-nazwa">
+                                    CaveBlock 1.20.4              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu FreeBuild 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/HZ1rCMo.png" alt="">
+                                <div id="tryb-nazwa">
+                                    FreeBuild 1.20.4              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu WaterBlock 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/v29gxds.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    WaterBlock 1.20.4              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu ChestPvP
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/P7UZb1q.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    ChestPvP
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu BedWars
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/FHoUbEa.png" alt="">
+                                <div id="tryb-nazwa">
+                                    BedWars              
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Creative 1.19.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/JaQS2vq.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    Creative 1.19.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Prison 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/Qg7UB6J.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    Prison 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+            
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Survival 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/hf2PFwS.jpg" alt="">
+                                <div id="tryb-nazwa">
+                                    Survival 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Anarchia LifeSteal 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/KHtyyfB.png" alt="">
+                                <div id="tryb-nazwa">
+                                    Anarchia LifeSteal 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu MegaDrop 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/I6c9jLc.png" alt="">
+                                <div id="tryb-nazwa">
+                                    MegaDrop 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu SkyBlock 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/qbIHJoe.png" alt="">
+                                <div id="tryb-nazwa">
+                                    SkyBlock 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Survival v2 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/FpsgZQN.png" alt="">
+                                <div id="tryb-nazwa">
+                                    Survival v2 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Gildie 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/ix2wf4I.png" alt="">
+                                <div id="tryb-nazwa">
+                                    Gildie 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu Survival 1.20.4 (Ekonomia)
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/JghxtmA.png" alt="">
+                                <div id="tryb-nazwa">
+                                    Survival 1.20.4 (Ekonomia)
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu BoxPVP 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/tV45l08.png" alt="">
+                                <div id="tryb-nazwa">
+                                    BoxPVP 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu MegaEnchant 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/BcngKMA.png" alt="">
+                                <div id="tryb-nazwa">
+                                    MegaEnchant 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu DropSMP 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/YMzDbD2.png" alt="">
+                                <div id="tryb-nazwa">
+                                    DropSMP 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+
+            <a href="#">
+                <div id="tryb">
+                    <div id="tryb-opis">
+                        Opis trybu EarthSMP 1.20.4
+                    </div>
+                        <div id="tryb-obraz">
+                            <img src="grafika/IyyW1g3.png" alt="">
+                                <div id="tryb-nazwa">
+                                    EarthSMP 1.20.4
+                                </div>
+                        </div>
+                </div>
+            </a>
+    </main>
+    <footer>
+        <div id="reklama">
+            <p>STWORZONE PRZEZ :<a href="https://zmcpl.github.io/"> Ziorbek</a></p>
+        </div>
+        <div id="license">Licencja dla serwisu : craftmc.pl</div>
+    </footer>
+</body>
+
+</html>
