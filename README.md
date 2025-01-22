@@ -6,6 +6,7 @@ W czym piszę czego się uczę :
 - HTML
 - CSS
 - JS
+
 Uczę się aktualnie :
 - PHP
 - React
