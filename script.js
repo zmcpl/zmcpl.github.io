@@ -32,10 +32,8 @@ function fetchActivePlayers() {
     });
 }
 
-// Pierwsze wywołanie funkcji
 fetchActivePlayers();
 
-// Regularne aktualizowanie statusu co 10 sekund
 setInterval(fetchActivePlayers, 60000);
 
 function otworz() {
