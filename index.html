@@ -7,7 +7,7 @@
     <!-- Google Fonts: Fredoka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -15,6 +15,15 @@
     <style>
         body {
             font-family: 'Fredoka', sans-serif;
+        }
+        /* Ukrywanie strzałek w input number */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
 </head>
@@ -27,7 +36,7 @@
                 <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 tracking-normal">
                     PS99 Tracker Openingu
                 </h1>
-                <p class="text-slate-400 text-sm mt-1 font-medium">Szybkie podsumowania podzielone na tygodnie roku (Baza IndexedDB)</p>
+                <p class="text-slate-400 text-sm mt-1 font-medium">Szybkie podsumowania podzielone na dni lub tygodnie (Baza IndexedDB)</p>
             </div>
             <div id="api-status" class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full text-xs font-bold text-amber-400 border border-amber-500/30">
                 <span class="relative flex h-2 w-2">
@@ -168,25 +177,70 @@
             </section>
 
             <!-- HISTORIA I ZAPISANE PODSUMOWANIA -->
-            <section class="lg:col-span-4 space-y-6">
+            <section class="lg:col-span-4 space-y-4">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
                     
-                    <!-- PASEK FILTROWANIA TYGODNI -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4 mb-4">
-                        <h2 class="text-xl font-bold flex items-center gap-2 text-orange-500">
-                            <i data-lucide="calendar-days"></i> Historia podzielona na Tygodnie
-                        </h2>
-                        <div class="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl">
-                            <label for="week-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                                <i data-lucide="filter" class="w-3.5 h-3.5 text-amber-500"></i> Filtruj:
-                            </label>
-                            <select id="week-filter" class="bg-transparent text-sm font-bold text-amber-400 focus:outline-none cursor-pointer">
-                                <option value="all" class="bg-slate-900 text-slate-100">Wszystkie tygodnie</option>
-                            </select>
+                    <!-- PANEL FILTROWANIA I PRZEŁĄCZANIA WIDOKÓW -->
+                    <div class="flex flex-col gap-4 border-b border-slate-800 pb-4 mb-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <h2 class="text-xl font-bold flex items-center gap-2 text-orange-500">
+                                <i data-lucide="calendar-days"></i> Historia Openingu
+                            </h2>
+                            
+                            <div class="flex flex-wrap items-center gap-3">
+                                <!-- Przełącznik: Tydzień vs Dzień -->
+                                <div class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl">
+                                    <label for="group-mode" class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                                        <i data-lucide="layers" class="w-3.5 h-3.5 text-orange-500"></i> Widok:
+                                    </label>
+                                    <select id="group-mode" class="bg-transparent text-sm font-bold text-slate-200 focus:outline-none cursor-pointer">
+                                        <option value="weeks" class="bg-slate-900 text-slate-100">Według Tygodni</option>
+                                        <option value="days" class="bg-slate-900 text-slate-100">Według Dni</option>
+                                    </select>
+                                </div>
+
+                                <!-- Tradycyjny select zakresu (Widoczny TYLKO dla trybu tygodni) -->
+                                <div id="week-filter-container" class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl">
+                                    <label for="dynamic-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                                        <i data-lucide="filter" class="w-3.5 h-3.5 text-amber-500"></i> Zakres:
+                                    </label>
+                                    <select id="dynamic-filter" class="bg-transparent text-sm font-bold text-amber-400 focus:outline-none cursor-pointer max-w-[200px]">
+                                        <option value="all" class="bg-slate-900 text-slate-100">Wszystko</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DYNAMICZNY INTERFEJS KALENDARZA (Widoczny TYLKO w trybie dni) -->
+                        <div id="calendar-filter-container" class="hidden bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
+                            <div class="flex items-center justify-between border-b border-slate-900 pb-2">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-amber-500"></i>
+                                    <span id="calendar-month-year" class="text-sm font-bold text-slate-200 uppercase tracking-wide"></span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <button id="btn-all-days" class="text-xs px-2.5 py-1 bg-slate-900 border border-slate-800 hover:border-amber-500/50 text-slate-300 rounded-lg font-medium transition cursor-pointer">
+                                        Pokaż wszystkie dni
+                                    </button>
+                                    <button id="btn-prev-month" class="p-1 hover:bg-slate-900 text-slate-400 hover:text-slate-200 rounded-lg transition"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                                    <button id="btn-next-month" class="p-1 hover:bg-slate-900 text-slate-400 hover:text-slate-200 rounded-lg transition"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                                </div>
+                            </div>
+                            <!-- Siatka kalendarza -->
+                            <div class="grid grid-cols-7 gap-1 text-center text-xs">
+                                <div class="text-slate-500 font-bold py-1">Pon</div>
+                                <div class="text-slate-500 font-bold py-1">Wto</div>
+                                <div class="text-slate-500 font-bold py-1">Śro</div>
+                                <div class="text-slate-500 font-bold py-1">Czw</div>
+                                <div class="text-slate-500 font-bold py-1">Pią</div>
+                                <div class="text-slate-500 font-bold py-1 text-amber-600">Sob</div>
+                                <div class="text-slate-500 font-bold py-1 text-rose-600">Nie</div>
+                            </div>
+                            <div id="calendar-days-grid" class="grid grid-cols-7 gap-1"></div>
                         </div>
                     </div>
                     
-                    <div id="history-container" class="space-y-8 max-h-[820px] overflow-y-auto pr-2">
+                    <div id="history-container" class="space-y-8 max-h-[780px] overflow-y-auto pr-2">
                         <p class="text-slate-500 text-sm italic py-4 text-center">Ładowanie bazy danych IndexedDB...</p>
                     </div>
                 </div>
@@ -216,9 +270,12 @@
     <script>
         let rapCache = [];
         let db = null;
-        let activeFilter = 'all';
+        let currentMode = 'weeks'; // 'weeks' lub 'days'
+        let activeFilter = 'all'; // Dla 'weeks' to ID tygodnia, dla 'days' to pełny ciąg 'YYYY-MM-DD'
 
-        // Definicja wariantów dla zwierzaków
+        // Bieżący miesiąc przeglądany w kalendarzu
+        let calendarDate = new Date(); 
+
         const petVariants = [
             { key: 'normal', label: 'Normal', pt: null, sh: null, bg: 'bg-slate-950 border-slate-800 text-slate-300' },
             { key: 'shiny', label: 'Shiny', pt: null, sh: true, bg: 'bg-sky-950/60 border-sky-900/60 text-sky-400' },
@@ -256,6 +313,7 @@
 
         function getAllLogsFromDB() {
             return new Promise((resolve) => {
+                if (!db) { resolve([]); return; }
                 const transaction = db.transaction(['sessions'], 'readonly');
                 const store = transaction.objectStore(['sessions']);
                 const request = store.getAll();
@@ -296,7 +354,7 @@
                 lucide.createIcons();
 
                 await initDB();
-                updateFilterOptions();
+                updateFiltersAndCalendar();
                 renderHistory();
                 runFooterDebugger('Huge Veil Horse', 'api-debugger-veil');
                 runFooterDebugger('Huge Mushroom Pixie', 'api-debugger-pixie');
@@ -308,7 +366,7 @@
                 lucide.createIcons();
                 
                 await initDB().catch(() => {});
-                updateFilterOptions();
+                updateFiltersAndCalendar();
                 renderHistory();
             }
         }
@@ -339,6 +397,7 @@
             });
         }
 
+        // Helpery daty i czasu
         function getWeekDetails(dateString) {
             const date = new Date(dateString);
             const dayNum = date.getUTCDay() || 7;
@@ -359,32 +418,162 @@
             };
         }
 
-        async function updateFilterOptions() {
-            const filterSelect = document.getElementById('week-filter');
-            const logs = await getAllLogsFromDB();
-            const uniqueWeeks = {};
-            
-            logs.forEach(log => {
-                const weekInfo = getWeekDetails(log.date);
-                uniqueWeeks[weekInfo.id] = weekInfo.label;
-            });
-
-            const sortedIds = Object.keys(uniqueWeeks).sort((a, b) => b.localeCompare(a));
-            filterSelect.innerHTML = '<option value="all" class="bg-slate-900 text-slate-100">Wszystkie tygodnie</option>';
-            sortedIds.forEach(id => {
-                const opt = document.createElement('option');
-                opt.value = id;
-                opt.className = "bg-slate-900 text-slate-100";
-                opt.textContent = uniqueWeeks[id];
-                if(id === activeFilter) opt.selected = true;
-                filterSelect.appendChild(opt);
-            });
+        function getDayDetails(dateString) {
+            const d = new Date(dateString);
+            const formatted = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+            const daysOfWeek = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+            return {
+                id: dateString,
+                label: `${daysOfWeek[d.getDay()]} (${formatted})`
+            };
         }
 
-        document.getElementById('week-filter').addEventListener('change', function(e) {
+        // --- AKTUALIZACJA WIDOKÓW: SELECT LUB KALENDARZ ---
+        async function updateFiltersAndCalendar() {
+            const weekContainer = document.getElementById('week-filter-container');
+            const calendarContainer = document.getElementById('calendar-filter-container');
+            const logs = await getAllLogsFromDB();
+
+            if (currentMode === 'weeks') {
+                weekContainer.classList.remove('hidden');
+                calendarContainer.classList.add('hidden');
+                
+                const filterSelect = document.getElementById('dynamic-filter');
+                const uniqueWeeks = {};
+                
+                logs.forEach(log => {
+                    const weekInfo = getWeekDetails(log.date);
+                    uniqueWeeks[weekInfo.id] = weekInfo.label;
+                });
+
+                const sortedKeys = Object.keys(uniqueWeeks).sort((a, b) => b.localeCompare(a));
+                filterSelect.innerHTML = `<option value="all" class="bg-slate-900 text-slate-100">Wszystkie tygodnie</option>`;
+                
+                sortedKeys.forEach(key => {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.className = "bg-slate-900 text-slate-100";
+                    opt.textContent = uniqueWeeks[key];
+                    if (key === activeFilter) opt.selected = true;
+                    filterSelect.appendChild(opt);
+                });
+            } else {
+                weekContainer.classList.add('hidden');
+                calendarContainer.classList.remove('hidden');
+                renderCalendarGrid(logs);
+            }
+        }
+
+        // --- GENEROWANIE KALENDARZA ---
+        function renderCalendarGrid(logs) {
+            const grid = document.getElementById('calendar-days-grid');
+            const monthYearLabel = document.getElementById('calendar-month-year');
+            grid.innerHTML = '';
+
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+
+            const polishMonths = [
+                "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", 
+                "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+            ];
+            monthYearLabel.textContent = `${polishMonths[month]} ${year}`;
+
+            // Mapowanie dni z bazy danych w których są wpisy
+            const activeDaysMap = {};
+            logs.forEach(l => { activeDaysMap[l.date] = true; });
+
+            // Pierwszy dzień miesiąca (0 = Niedziela, ..., 6 = Sobota) -> zamieniamy na system 0 = Pon, 6 = Nie
+            let firstDayIndex = new Date(year, month, 1).getDay() - 1;
+            if (firstDayIndex < 0) firstDayIndex = 6; 
+
+            const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+            const totalDaysInPrevMonth = new Date(year, month, 0).getDate();
+
+            // Puste/szare dni z poprzedniego miesiąca
+            for (let i = firstDayIndex; i > 0; i--) {
+                const dayNum = totalDaysInPrevMonth - i + 1;
+                const cell = document.createElement('div');
+                cell.className = "text-slate-700 py-2 text-xs font-medium cursor-not-allowed select-none";
+                cell.textContent = dayNum;
+                grid.appendChild(cell);
+            }
+
+            // Dni bieżącego miesiąca
+            for (let day = 1; day <= totalDaysInMonth; day++) {
+                const currentDayStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const hasData = activeDaysMap[currentDayStr];
+                const isSelected = activeFilter === currentDayStr;
+
+                const cell = document.createElement('button');
+                cell.type = "button";
+                
+                // Bazowe klasy dla komórki dnia
+                let cellClasses = "py-2 text-xs font-bold rounded-xl transition flex flex-col items-center justify-center relative cursor-pointer ";
+                
+                if (isSelected) {
+                    cellClasses += "bg-gradient-to-br from-amber-500 to-orange-500 text-slate-950 shadow-md shadow-orange-500/20";
+                } else if (hasData) {
+                    cellClasses += "bg-slate-900 border border-orange-500/40 text-orange-400 hover:border-orange-500 hover:bg-slate-850";
+                } else {
+                    cellClasses += "text-slate-400 hover:bg-slate-900 hover:text-slate-200";
+                }
+
+                cell.className = cellClasses;
+                cell.textContent = day;
+
+                // Dodanie małej kropeczki informującej o dropie/danych, jeśli dzień nie jest zaznaczony
+                if (hasData && !isSelected) {
+                    const dot = document.createElement('span');
+                    dot.className = "absolute bottom-1 w-1 h-1 bg-orange-500 rounded-full";
+                    cell.appendChild(dot);
+                }
+
+                cell.addEventListener('click', () => {
+                    activeFilter = currentDayStr;
+                    renderCalendarGrid(logs);
+                    renderHistory();
+                });
+
+                grid.appendChild(cell);
+            }
+        }
+
+        // Kontrolery zmiany miesięcy w kalendarzu
+        document.getElementById('btn-prev-month').addEventListener('click', async () => {
+            calendarDate.setMonth(calendarDate.getMonth() - 1);
+            const logs = await getAllLogsFromDB();
+            renderCalendarGrid(logs);
+        });
+
+        document.getElementById('btn-next-month').addEventListener('click', async () => {
+            calendarDate.setMonth(calendarDate.getMonth() + 1);
+            const logs = await getAllLogsFromDB();
+            renderCalendarGrid(logs);
+        });
+
+        document.getElementById('btn-all-days').addEventListener('click', async () => {
+            activeFilter = 'all';
+            const logs = await getAllLogsFromDB();
+            renderCalendarGrid(logs);
+            renderHistory();
+        });
+
+        // Obsługa tradycyjnego filtra tygodni
+        document.getElementById('dynamic-filter').addEventListener('change', function(e) {
             activeFilter = e.target.value;
             renderHistory();
         });
+
+        // Przełączanie trybów grupujących (Tygodnie vs Dni)
+        document.getElementById('group-mode').addEventListener('change', function(e) {
+            currentMode = e.target.value;
+            activeFilter = 'all'; 
+            calendarDate = new Date(); // powrót do dzisiejszego miesiąca na kalendarzu
+            updateFiltersAndCalendar();
+            renderHistory();
+        });
+
 
         // --- RENDEROWANIE HISTORII ---
         async function renderHistory() {
@@ -400,12 +589,14 @@
             const groups = {};
 
             logs.forEach(log => {
-                const weekInfo = getWeekDetails(log.date);
-                if (activeFilter !== 'all' && weekInfo.id !== activeFilter) return;
+                const info = currentMode === 'weeks' ? getWeekDetails(log.date) : getDayDetails(log.date);
+                
+                // Sprawdzanie filtrowania zakresów
+                if (activeFilter !== 'all' && info.id !== activeFilter) return;
 
-                if (!groups[weekInfo.id]) {
-                    groups[weekInfo.id] = {
-                        label: weekInfo.label,
+                if (!groups[info.id]) {
+                    groups[info.id] = {
+                        label: info.label,
                         items: [],
                         stats: {
                             totalGifts: 0, totalCostRaw: 0, totalNetGemsRaw: 0, totalDropValueRaw: 0,
@@ -420,26 +611,29 @@
                 const giftCostRaw = log.giftsOpened * 40_000;
                 const netGemsProfit = (gemsAfterRaw - gemsBeforeRaw) - giftCostRaw;
 
-                groups[weekInfo.id].stats.totalGifts += log.giftsOpened;
-                groups[weekInfo.id].stats.totalCostRaw += giftCostRaw;
-                groups[weekInfo.id].stats.totalNetGemsRaw += netGemsProfit;
+                groups[info.id].stats.totalGifts += log.giftsOpened;
+                groups[info.id].stats.totalCostRaw += giftCostRaw;
+                groups[info.id].stats.totalNetGemsRaw += netGemsProfit;
 
-                // Sumowanie dropów tygodniowych dla obu Huge
                 petVariants.forEach(v => {
-                    groups[weekInfo.id].stats.veilDrops[v.key] += (log.veilDrops ? log.veilDrops[v.key] || 0 : 0);
-                    groups[weekInfo.id].stats.pixieDrops[v.key] += (log.pixieDrops ? log.pixieDrops[v.key] || 0 : 0);
+                    groups[info.id].stats.veilDrops[v.key] += (log.veilDrops ? log.veilDrops[v.key] || 0 : 0);
+                    groups[info.id].stats.pixieDrops[v.key] += (log.pixieDrops ? log.pixieDrops[v.key] || 0 : 0);
                 });
 
-                groups[weekInfo.id].items.push(log);
+                groups[info.id].items.push(log);
             });
 
-            const sortedWeekIds = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+            const sortedGroupIds = Object.keys(groups).sort((a, b) => b.localeCompare(a));
 
-            sortedWeekIds.forEach(weekId => {
-                const group = groups[weekId];
+            if (sortedGroupIds.length === 0) {
+                container.innerHTML = `<p class="text-slate-500 text-sm italic py-8 text-center">Brak wpisów dla zaznaczonego kryterium w kalendarzu.</p>`;
+                return;
+            }
+
+            sortedGroupIds.forEach(groupId => {
+                const group = groups[groupId];
                 group.items.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                // Kalkulacja wartości dropów z cenami z API
                 petVariants.forEach(v => {
                     const veilCount = group.stats.veilDrops[v.key];
                     if (veilCount > 0) group.stats.totalDropValueRaw += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * veilCount);
@@ -448,35 +642,33 @@
                     if (pixieCount > 0) group.stats.totalDropValueRaw += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * pixieCount);
                 });
 
-                const totalWeekProfitM = (group.stats.totalNetGemsRaw + group.stats.totalDropValueRaw) / 1_000_000;
+                const totalGroupProfitM = (group.stats.totalNetGemsRaw + group.stats.totalDropValueRaw) / 1_000_000;
 
-                // Wygenerowanie łącznych plakietek dropu tygodnia
-                let weekTotalDropsHTML = '';
+                let groupTotalDropsHTML = '';
                 petVariants.forEach(v => {
                     const vCount = group.stats.veilDrops[v.key];
-                    if (vCount > 0) weekTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Veil: ${vCount}x ${v.label}</span>`;
+                    if (vCount > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Veil: ${vCount}x ${v.label}</span>`;
                 });
                 petVariants.forEach(v => {
                     const pCount = group.stats.pixieDrops[v.key];
-                    if (pCount > 0) weekTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Pixie: ${pCount}x ${v.label}</span>`;
+                    if (pCount > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Pixie: ${pCount}x ${v.label}</span>`;
                 });
 
-                let weekHTML = `
-                    <div class="space-y-4 border-l-2 border-slate-800 pl-4 md:pl-5 relative">
+                let groupHTML = `
+                    <div class="space-y-3 border-l-2 border-slate-800 pl-4 md:pl-5 relative">
                         <div class="absolute -left-[7px] top-1.5 w-3 h-3 bg-orange-500 rounded-full ring-4 ring-slate-950"></div>
                         <h3 class="text-sm font-extrabold text-orange-500 tracking-normal uppercase flex items-center gap-1.5">
                             <i data-lucide="chevron-right" class="w-4 h-4"></i> ${group.label}
                         </h3>
 
-                        <!-- WIDGET TYGODNIA -->
                         <div class="bg-slate-950 border border-slate-800/60 rounded-xl p-3 grid grid-cols-2 sm:grid-cols-4 gap-4 shadow-inner">
                             <div class="flex flex-col"><span class="text-[10px] text-slate-500 font-bold uppercase">Otwarte razem</span><span class="text-sm font-mono font-bold text-slate-300">${group.stats.totalGifts} szt.</span></div>
                             <div class="flex flex-col"><span class="text-[10px] text-slate-500 font-bold uppercase">Koszt boxów</span><span class="text-sm font-mono font-bold text-rose-400">-${(group.stats.totalCostRaw / 1_000_000).toFixed(2)}M</span></div>
                             <div class="flex flex-col"><span class="text-[10px] text-slate-500 font-bold uppercase">Zysk z gemów</span><span class="text-sm font-mono font-bold ${group.stats.totalNetGemsRaw >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${group.stats.totalNetGemsRaw >= 0 ? '+' : ''}${(group.stats.totalNetGemsRaw / 1_000_000).toFixed(2)}M</span></div>
-                            <div class="flex flex-col"><span class="text-[10px] text-amber-400 font-bold uppercase">ŁĄCZNY BILANS TYGODNIA</span><span class="text-sm font-mono font-black ${totalWeekProfitM >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${totalWeekProfitM >= 0 ? '+' : ''}${totalWeekProfitM.toFixed(2)}M 💎</span></div>
-                            ${weekTotalDropsHTML ? `<div class="col-span-full border-t border-slate-900 pt-2 flex flex-wrap items-center gap-1.5"><span class="text-[10px] text-slate-400 font-bold uppercase mr-1">Suma dropu:</span>${weekTotalDropsHTML}</div>` : ''}
+                            <div class="flex flex-col"><span class="text-[10px] text-amber-400 font-bold uppercase">ŁĄCZNY BILANS</span><span class="text-sm font-mono font-black ${totalGroupProfitM >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${totalGroupProfitM >= 0 ? '+' : ''}${totalGroupProfitM.toFixed(2)}M 💎</span></div>
+                            ${groupTotalDropsHTML ? `<div class="col-span-full border-t border-slate-900 pt-2 flex flex-wrap items-center gap-1.5"><span class="text-[10px] text-slate-400 font-bold uppercase mr-1">Suma dropu:</span>${groupTotalDropsHTML}</div>` : ''}
                         </div>
-                        <div class="space-y-2.5 pl-1">
+                        <div class="space-y-2 pl-1">
                 `;
 
                 group.items.forEach(log => {
@@ -488,22 +680,18 @@
                     let lDropVal = 0;
                     let lBadgesHTML = '';
 
-                    // Generowanie odznak dla sesji (Veil Horse)
                     petVariants.forEach(v => {
                         const count = log.veilDrops ? log.veilDrops[v.key] || 0 : 0;
                         if (count > 0) {
-                            const val = findPetPrice('Huge Veil Horse', v.pt, v.sh) * count;
-                            lDropVal += val;
+                            lDropVal += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * count);
                             lBadgesHTML += `<div class="flex items-center gap-1 px-2 py-0.5 rounded border ${v.bg} text-[10px]"><span>Veil ${v.label} x${count}</span></div>`;
                         }
                     });
 
-                    // Generowanie odznak dla sesji (Mushroom Pixie)
                     petVariants.forEach(v => {
                         const count = log.pixieDrops ? log.pixieDrops[v.key] || 0 : 0;
                         if (count > 0) {
-                            const val = findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * count;
-                            lDropVal += val;
+                            lDropVal += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * count);
                             lBadgesHTML += `<div class="flex items-center gap-1 px-2 py-0.5 rounded border ${v.bg} text-[10px]"><span>Pixie ${v.label} x${count}</span></div>`;
                         }
                     });
@@ -511,7 +699,7 @@
                     const sessionTotalM = (lNetGems + lDropVal) / 1_000_000;
                     const d = new Date(log.date);
 
-                    weekHTML += `
+                    groupHTML += `
                         <div class="bg-slate-900 border border-slate-800/80 rounded-xl p-3 shadow-sm flex flex-col gap-2">
                             <div class="flex justify-between items-center border-b border-slate-800/50 pb-1.5">
                                 <div class="flex items-center gap-2">
@@ -536,8 +724,8 @@
                     `;
                 });
 
-                weekHTML += `</div></div>`;
-                container.innerHTML += weekHTML;
+                groupHTML += `</div></div>`;
+                container.innerHTML += groupHTML;
             });
             lucide.createIcons();
         }
@@ -573,10 +761,9 @@
             const newLog = { account, date, giftsOpened, gemsBeforeM, gemsAfterM, veilDrops, pixieDrops };
 
             await addLogToDB(newLog);
-            await updateFilterOptions();
+            await updateFiltersAndCalendar();
             renderHistory();
 
-            // Resetowanie pól formularza
             document.getElementById('gifts-opened').value = 0;
             document.getElementById('gems-before').value = 0;
             document.getElementById('gems-after').value = 0;
@@ -590,7 +777,7 @@
         window.deleteLog = async function(id) {
             if(confirm("Usunąć to podsumowanie z bazy danych IndexedDB?")) {
                 await deleteLogFromDB(id);
-                await updateFilterOptions();
+                await updateFiltersAndCalendar();
                 renderHistory();
             }
         }
