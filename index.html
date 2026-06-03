@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PS99 Gift Opener Tracker</title>
+    <!-- Google Fonts: Fredoka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&display=swap" rel="stylesheet">
@@ -23,7 +24,6 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
-        /* Styl dla płynnego znikania loading screenu (zwiększony komfort przejścia) */
         .fade-out {
             opacity: 0;
             pointer-events: none;
@@ -33,6 +33,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col tracking-wide relative">
 
+    <!-- ANIMOWANY EKRAN ŁADOWANIA (LOADING SCREEN) -->
     <div id="loading-screen" class="fixed inset-0 bg-slate-950 z-50 flex flex-col justify-center items-center">
         <div class="relative flex flex-col items-center p-6 text-center">
             <div class="relative mb-6">
@@ -52,6 +53,7 @@
     </div>
 
     <div class="max-w-[95%] xl:max-w-[98%] mx-auto p-4 md:p-6 flex-grow w-full">
+        <!-- NAGŁÓWEK -->
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-5 mb-6 gap-4">
             <div>
                 <h1 id="t-title" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 tracking-normal">
@@ -81,6 +83,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-6 gap-6">
             
+            <!-- LEWA KOLUMNA: FORMULARZ I CENNIK -->
             <div class="lg:col-span-2 space-y-6">
                 <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 h-fit space-y-5">
                     <h2 id="t-form-title" class="text-xl font-bold flex items-center gap-2 text-amber-400">
@@ -88,17 +91,26 @@
                     </h2>
                     
                     <form id="opening-form" class="space-y-4">
-                        <div>
-                            <label id="t-label-account" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Konto</label>
-                            <input type="text" id="account-input" list="accounts-list" placeholder="Ziorbek..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-100 font-medium focus:outline-none focus:border-amber-500 transition" required>
-                            <datalist id="accounts-list">
-                                <option value="Ziorbek"></option>
-                                <option value="ZiorbekRestock"></option>
-                                <option value="ZiorbekRestock2"></option>
-                                <option value="TechPoland"></option>
-                                <option value="DarkLineUp2"></option>
-                                <option value="Kaziu Zadymiarz"></option>
-                            </datalist>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label id="t-label-account" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Konto</label>
+                                <input type="text" id="account-input" list="accounts-list" placeholder="Ziorbek..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-100 font-medium focus:outline-none focus:border-amber-500 transition" required>
+                                <datalist id="accounts-list">
+                                    <option value="Ziorbek"></option>
+                                    <option value="ZiorbekRestock"></option>
+                                    <option value="ZiorbekRestock2"></option>
+                                    <option value="TechPoland"></option>
+                                    <option value="DarkLineUp2"></option>
+                                    <option value="Kaziu Zadymiarz"></option>
+                                </datalist>
+                            </div>
+                            <div>
+                                <label id="t-label-tier" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Typ Paczki (Tier)</label>
+                                <select id="tier-input" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 font-bold focus:outline-none focus:border-amber-500 transition cursor-pointer">
+                                    <option value="2" selected>Tier 2 (Farma/4.5k)</option>
+                                    <option value="3">Tier 3 (RAP/40k)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
@@ -123,15 +135,15 @@
                             </div>
                         </div>
 
+                        <!-- PANEL DROPU HUGE -->
                         <div class="border-t border-slate-800 pt-4 space-y-4">
                             <label id="t-huge-panel-title" class="block text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                                 <i data-lucide="sparkles" class="w-4 h-4"></i> Trafione Zwierzaki Huge
                             </label>
                             
+                            <!-- HUGE VEIL HORSE -->
                             <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 space-y-2">
-                                <div class="text-[11px] font-bold uppercase tracking-wider text-orange-400 border-b border-slate-900 pb-1">
-                                    <span>Huge Veil Horse</span>
-                                </div>
+                                <div class="text-[11px] font-bold uppercase tracking-wider text-orange-400 border-b border-slate-900 pb-1">Huge Veil Horse</div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div><label class="text-[10px] text-slate-400">Normal</label><input type="number" id="qty-veil-normal" value="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs font-mono mt-0.5"></div>
                                     <div><label class="text-[10px] text-sky-400">Shiny</label><input type="number" id="qty-veil-shiny" value="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs font-mono mt-0.5"></div>
@@ -142,10 +154,9 @@
                                 </div>
                             </div>
 
+                            <!-- HUGE MUSHROOM PIXIE -->
                             <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 space-y-2">
-                                <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 border-b border-slate-900 pb-1">
-                                    <span>Huge Mushroom Pixie</span>
-                                </div>
+                                <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 border-b border-slate-900 pb-1">Huge Mushroom Pixie</div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div><label class="text-[10px] text-slate-400">Normal</label><input type="number" id="qty-pixie-normal" value="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs font-mono mt-0.5"></div>
                                     <div><label class="text-[10px] text-sky-400">Shiny</label><input type="number" id="qty-pixie-shiny" value="0" min="0" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-xs font-mono mt-0.5"></div>
@@ -180,9 +191,9 @@
                 </section>
             </div>
 
+            <!-- PRAWA KOLUMNA: HISTORIA ORAZ Q&A -->
             <div class="lg:col-span-4 space-y-6">
                 <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                    
                     <div class="flex flex-col gap-4 border-b border-slate-800 pb-4 mb-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <h2 id="t-history-title" class="text-xl font-bold flex items-center gap-2 text-orange-500">
@@ -211,6 +222,7 @@
                             </div>
                         </div>
 
+                        <!-- KALENDARZ -->
                         <div id="calendar-filter-container" class="hidden bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3">
                             <div class="flex items-center justify-between border-b border-slate-900 pb-2">
                                 <div class="flex items-center gap-2">
@@ -235,11 +247,11 @@
                     </div>
                 </section>
 
+                <!-- Q&A -->
                 <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
                     <h2 id="t-qa-title" class="text-xl font-bold flex items-center gap-2 text-amber-400 border-b border-slate-800 pb-3">
                         <i data-lucide="help-circle"></i> Często Zadawane Pytania (Q&A)
                     </h2>
-                    
                     <div class="space-y-3">
                         <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3.5">
                             <h4 id="t-q1-head" class="text-sm font-bold text-slate-200 flex items-center gap-2"></h4>
@@ -260,17 +272,16 @@
                     </div>
                 </section>
             </div>
-
         </div>
     </div>
 
+    <!-- STOPKA -->
     <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-6 px-4">
         <div class="max-w-[95%] xl:max-w-[98%] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
             <div class="flex items-center gap-2 font-medium">
                 <i data-lucide="code" class="w-4 h-4 text-amber-500"></i>
                 <span>Created by <strong class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 font-extrabold">GEMINI AI & Ziorbek</strong></span>
             </div>
-            
             <div class="flex items-center gap-5">
                 <a href="https://www.twitch.tv/ziorbek" target="_blank" class="flex items-center gap-1.5 text-slate-400 hover:text-fuchsia-400 font-bold transition">
                     <i data-lucide="twitch" class="w-4 h-4"></i> Twitch
@@ -282,15 +293,11 @@
                     <i data-lucide="youtube" class="w-4 h-4"></i> YouTube
                 </a>
             </div>
-            
-            <div class="text-xs text-slate-500 font-mono">
-                &copy; 2026 PS99 Tracker Corp
-            </div>
+            <div class="text-xs text-slate-500 font-mono">&copy; 2026 PS99 Tracker Corp</div>
         </div>
     </footer>
 
     <script>
-        // --- SŁOWNIK TŁUMACZEŃ (I18N) ---
         const i18n = {
             pl: {
                 title: "PS99 Tracker Openingu",
@@ -315,7 +322,7 @@
                 labelRange: "Zakres:",
                 optAllWeeks: "Wszystkie tygodnie",
                 btnAllDays: "Pokaż wszystkie dni",
-                dbLoading: "Ładowanie bazy danych IndexedDB...",
+                dbLoading: "Ładowanie bazy danych...",
                 dbEmpty: "Brak zapisanych sesji.",
                 dbNoMatch: "Brak wpisów dla zaznaczonego kryterium.",
                 weekWord: "TYDZIEŃ",
@@ -327,16 +334,15 @@
                 sumDrop: "Suma dropu:",
                 noHuge: "Brak dropu Huge",
                 deleteBtn: "Usuń",
-                confirmDelete: "Usunąć to podsumowanie z bazy danych IndexedDB?",
                 qaTitle: "Często Zadawane Pytania (Q&A)",
-                q1Head: "<span class='text-amber-500 font-mono'>1.</span> Jak działa zapis danych?",
-                q1Body: "Twoje dane są w 100% bezpieczne i zapisywane bezpośrednio w Twojej przeglądarce przy użyciu bazy danych IndexedDB. Strona nie wysyła Twoich wyników na żadne zewnętrzne serwery, co oznacza, że masz do nich dostęp tylko Ty na tym urządzeniu.",
-                q2Head: "<span class='text-amber-500 font-mono'>2.</span> Do czego służy ta strona?",
-                q2Body: "Aplikacja została stworzona do dokładnego monitorowania zarobków i opłacalności otwierania paczek (Gifts) w Pet Simulator 99. Pozwala śledzić bilans gemów, wydatki na boksy oraz wartość dropu na podstawie rzeczywistych cen rynkowych.",
-                q3Head: "<span class='text-amber-500 font-mono'>3.</span> Jak działa inteligentne łączenie sesji?",
-                q3Body: "Jeśli otwierasz boksy wielokrotnie w ciągu jednego dnia na tym samym koncie, nie musisz tworzyć nowych wpisów. Strona automatycznie rozpozna powtarzającą się datę i konto, zsumuje otwarte boksy, doda nowe dropy Huge, a także zaktualizuje końcowy stan gemów, zachowując nienaruszony stan początkowy.",
-                q4Head: "<span class='text-amber-500 font-mono'>4.</span> Skąd pochodzą ceny Huge zwierzaków?",
-                q4Body: "Aplikacja w czasie rzeczywistym łączy się z oficjalnym interfejsem BIG Games API w celu pobrania aktualnej wartości RAP (Recent Average Price). Dzięki temu wyliczenia łącznego zysku w historii są zawsze idealnie dopasowane do aktualnej sytuacji na rynku gry.",
+                q1Head: "<span class='text-amber-500 font-mono'>2.1</span> Jak działa zapis danych?",
+                q1Body: "Twoje dane są w 100% bezpieczne i zapisywane bezpośrednio w Twojej przeglądarce przy użyciu bazy danych IndexedDB.",
+                q2Head: "<span class='text-amber-500 font-mono'>2.2</span> Do czego służy ta strona?",
+                q2Body: "Aplikacja służy do monitorowania zarobków i opłacalności otwierania paczek w PS99 (w tym Tier 3 oraz farmerskich Tier 2).",
+                q3Head: "<span class='text-amber-500 font-mono'>2.3</span> Inteligentne łączenie?",
+                q3Body: "Strona automatycznie połączy wpisy z tego samego dnia, konta oraz o tym samym Tierze, sumując ich statystyki.",
+                q4Head: "<span class='text-amber-500 font-mono'>2.4</span> Skąd pochodzą ceny?",
+                q4Body: "Z oficjalnego BIG Games API w czasie rzeczywistym.",
                 calDays: ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"],
                 months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
                 daysOfWeekNames: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"]
@@ -364,9 +370,9 @@
                 labelRange: "Range:",
                 optAllWeeks: "All Weeks",
                 btnAllDays: "Show all days",
-                dbLoading: "Loading IndexedDB database...",
+                dbLoading: "Loading database...",
                 dbEmpty: "No saved sessions found.",
-                dbNoMatch: "No entries match the selected criteria.",
+                dbNoMatch: "No entries match.",
                 weekWord: "WEEK",
                 openedTotal: "Total opened",
                 pcsUnit: "pcs.",
@@ -376,16 +382,11 @@
                 sumDrop: "Total drop:",
                 noHuge: "No Huge drops",
                 deleteBtn: "Delete",
-                confirmDelete: "Delete this summary from IndexedDB?",
                 qaTitle: "Frequently Asked Questions (Q&A)",
-                q1Head: "<span class='text-amber-500 font-mono'>1.</span> How does data storage work?",
-                q1Body: "Your data is 100% secure and stored locally in your browser using IndexedDB. The app does not transmit your data to any external servers, meaning you are the only one who can access your records.",
-                q2Head: "<span class='text-amber-500 font-mono'>2.</span> What is the purpose of this website?",
-                q2Body: "This application is built to comprehensively monitor profits and cost-efficiency when opening reward bundles (Gifts) in Pet Simulator 99. It lets you log your gem balance shifts, box expenses, and drops valuation side-by-side.",
-                q3Head: "<span class='text-amber-500 font-mono'>3.</span> How does smart session merging work?",
-                q3Body: "If you unbox gifts multiple times throughout a single day on the same account, you don't need to bloat your view with separate lines. The page identifies overlapping dates and profiles, pools box amounts, accumulates Huges, and shifts final gem counts while retaining the original baseline.",
-                q4Head: "<span class='text-amber-500 font-mono'>4.</span> Where do the Huge pet values come from?",
-                q4Body: "The app communicates live with the official BIG Games API endpoint to request current RAP (Recent Average Price) metrics. This process makes sure your automated historical yield balances are perfectly adjusted to current marketplace trends.",
+                q1Head: "Storage", q1Body: "Saved locally via IndexedDB.",
+                q2Head: "Purpose", q2Body: "Track Tier 3 and Tier 2 unboxing efficiencies.",
+                q3Head: "Merging", q3Body: "Combines same account, date and Tier tier perfectly.",
+                q4Head: "Prices", q4Body: "Live values fetched directly from BIG Games.",
                 calDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
                 months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 daysOfWeekNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -408,16 +409,12 @@
             { key: 'shinyRb', label: 'S. RB', pt: 2, sh: true, bg: 'bg-fuchsia-900/40 border-fuchsia-500/30 text-fuchsia-300 font-bold' }
         ];
 
-        // --- FUNKCJA TŁUMACZENIA INTERFEJSU ---
         function applyLanguage() {
             const lang = i18n[currentLang];
-            
             document.getElementById('t-title').textContent = lang.title;
             document.getElementById('t-subtitle').textContent = lang.subtitle;
             document.getElementById('t-loadscreen-text').textContent = lang.loadscreenText;
-            if (document.getElementById('t-api-loading')) {
-                document.getElementById('t-api-loading').textContent = lang.apiLoading;
-            }
+            if (document.getElementById('t-api-loading')) document.getElementById('t-api-loading').textContent = lang.apiLoading;
             document.getElementById('t-form-title').innerHTML = `<i data-lucide="plus-circle"></i> ${lang.formTitle}`;
             document.getElementById('t-label-account').textContent = lang.labelAccount;
             document.getElementById('t-label-date').textContent = lang.labelDate;
@@ -435,18 +432,12 @@
             document.getElementById('t-opt-all-weeks').textContent = lang.optAllWeeks;
             document.getElementById('btn-all-days').textContent = lang.btnAllDays;
             
-            // Tłumaczenie sekcji Q&A
             document.getElementById('t-qa-title').innerHTML = `<i data-lucide="help-circle"></i> ${lang.qaTitle}`;
-            document.getElementById('t-q1-head').innerHTML = lang.q1Head;
-            document.getElementById('t-q1-body').textContent = lang.q1Body;
-            document.getElementById('t-q2-head').innerHTML = lang.q2Head;
-            document.getElementById('t-q2-body').textContent = lang.q2Body;
-            document.getElementById('t-q3-head').innerHTML = lang.q3Head;
-            document.getElementById('t-q3-body').textContent = lang.q3Body;
-            document.getElementById('t-q4-head').innerHTML = lang.q4Head;
-            document.getElementById('t-q4-body').textContent = lang.q4Body;
+            document.getElementById('t-q1-head').innerHTML = lang.q1Head; document.getElementById('t-q1-body').textContent = lang.q1Body;
+            document.getElementById('t-q2-head').innerHTML = lang.q2Head; document.getElementById('t-q2-body').textContent = lang.q2Body;
+            document.getElementById('t-q3-head').innerHTML = lang.q3Head; document.getElementById('t-q3-body').textContent = lang.q3Body;
+            document.getElementById('t-q4-head').innerHTML = lang.q4Head; document.getElementById('t-q4-body').textContent = lang.q4Body;
 
-            // Render nagłówków kalendarza
             const calHeader = document.getElementById('calendar-header-days');
             calHeader.innerHTML = '';
             lang.calDays.forEach((dayName, idx) => {
@@ -455,7 +446,6 @@
                 dayDiv.textContent = dayName;
                 calHeader.appendChild(dayDiv);
             });
-
             document.getElementById('lang-select').value = currentLang;
             lucide.createIcons();
         }
@@ -465,7 +455,6 @@
             window.location.reload();
         });
 
-        lucide.createIcons();
         document.getElementById('session-date').value = new Date().toISOString().split('T')[0];
         applyLanguage();
 
@@ -502,7 +491,11 @@
                 
                 requestGetAll.onsuccess = function() {
                     const allLogs = requestGetAll.result || [];
-                    const existingLog = allLogs.find(l => l.account.trim().toLowerCase() === newLog.account.trim().toLowerCase() && l.date === newLog.date);
+                    const existingLog = allLogs.find(l => 
+                        l.account.trim().toLowerCase() === newLog.account.trim().toLowerCase() && 
+                        l.date === newLog.date && 
+                        (l.tier || 2) === newLog.tier
+                    );
                     
                     if (existingLog) {
                         existingLog.giftsOpened += newLog.giftsOpened;
@@ -534,15 +527,12 @@
             });
         }
 
-        // --- FETCH RAP API Z WYMUSZONYM OPÓŹNIENIEM 3 SEKUND ---
+        // --- RAP API ---
         async function fetchRAP() {
             const statusBadge = document.getElementById('api-status');
             const loadingScreen = document.getElementById('loading-screen');
+            const delayPromise = new Promise(resolve => setTimeout(resolve, 1500));
             
-            // Definiujemy licznik czasu trwający dokładnie 3000ms
-            const delayPromise = new Promise(resolve => setTimeout(resolve, 3000));
-            
-            // Definiujemy asynchroniczne pobieranie danych i bazy
             const dataPromise = (async () => {
                 try {
                     const response = await fetch('https://ps99.biggamesapi.io/api/rap');
@@ -556,10 +546,8 @@
                 }
             })();
 
-            // Czekamy na wykonanie OBU procesów równolegle
             const [_, apiSuccess] = await Promise.all([delayPromise, dataPromise]);
 
-            // Przetwarzanie rezultatów po upływie 3 sekund
             if (apiSuccess) {
                 statusBadge.className = "flex items-center gap-2 bg-emerald-950 px-4 py-2 rounded-full text-xs font-bold text-emerald-400 border border-emerald-500/30 whitespace-nowrap";
                 statusBadge.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span id="t-api-connected"></span>`;
@@ -582,12 +570,9 @@
                 renderHistory();
             }
 
-            // Płynne schowanie loading screenu po pełnych 3 sekundach
             if (loadingScreen) {
                 loadingScreen.classList.add('fade-out');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 800); // 800ms dopasowane do cubic-bezier transition
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 800);
             }
         }
 
@@ -641,10 +626,7 @@
             const lang = i18n[currentLang];
             const d = new Date(dateString);
             const formatted = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
-            return {
-                id: dateString,
-                label: `${lang.daysOfWeekNames[d.getDay()]} (${formatted})`
-            };
+            return { id: dateString, label: `${lang.daysOfWeekNames[d.getDay()]} (${formatted})` };
         }
 
         async function updateFiltersAndCalendar() {
@@ -764,30 +746,38 @@
                 if (!groups[info.id]) {
                     groups[info.id] = {
                         label: info.label,
-                        items: [],
+                        accountsData: {}, 
                         stats: {
-                            totalGifts: 0, totalCostRaw: 0, totalNetGemsRaw: 0, totalDropValueRaw: 0,
-                            veilDrops: { normal: 0, shiny: 0, gold: 0, shinyGold: 0, rb: 0, shinyRb: 0 },
-                            pixieDrops: { normal: 0, shiny: 0, gold: 0, shinyGold: 0, rb: 0, shinyRb: 0 }
+                            totalGifts: 0, totalCostRaw: 0, totalNetGemsRaw: 0, totalDropValueRaw: 0
                         }
                     };
                 }
 
-                const gemsBeforeRaw = log.gemsBeforeM * 1_000_000;
-                const gemsAfterRaw = log.gemsAfterM * 1_000_000;
-                const giftCostRaw = log.giftsOpened * 40_000;
-                const netGemsProfit = (gemsAfterRaw - gemsBeforeRaw) - giftCostRaw;
+                // Grupowanie wewnątrz tygodnia/dnia według: Konta + Konkretnej Daty
+                const accKey = `${log.account.trim()}_${log.date}`;
+                if (!groups[info.id].accountsData[accKey]) {
+                    groups[info.id].accountsData[accKey] = {
+                        accountName: log.account,
+                        date: log.date,
+                        sessions: [],
+                        totalAccountProfitM: 0 
+                    };
+                }
+
+                const logTier = log.tier || 2;
+                const singleCost = logTier === 2 ? 4500 : 40000;
+                const giftCostRaw = log.giftsOpened * singleCost;
+                const netGemsProfit = (log.gemsAfterM * 1_000_000 - log.gemsBeforeM * 1_000_000) - giftCostRaw;
 
                 groups[info.id].stats.totalGifts += log.giftsOpened;
                 groups[info.id].stats.totalCostRaw += giftCostRaw;
                 groups[info.id].stats.totalNetGemsRaw += netGemsProfit;
 
-                petVariants.forEach(v => {
-                    groups[info.id].stats.veilDrops[v.key] += (log.veilDrops ? log.veilDrops[v.key] || 0 : 0);
-                    groups[info.id].stats.pixieDrops[v.key] += (log.pixieDrops ? log.pixieDrops[v.key] || 0 : 0);
+                groups[info.id].accountsData[accKey].sessions.push({
+                    log: log,
+                    netGemsProfit: netGemsProfit,
+                    giftCostRaw: giftCostRaw
                 });
-
-                groups[info.id].items.push(log);
             });
 
             const sortedGroupIds = Object.keys(groups).sort((a, b) => b.localeCompare(a));
@@ -799,26 +789,40 @@
 
             sortedGroupIds.forEach(groupId => {
                 const group = groups[groupId];
-                group.items.sort((a, b) => new Date(b.date) - new Date(a.date));
+                let groupTotalDropValueRaw = 0;
 
-                petVariants.forEach(v => {
-                    const veilCount = group.stats.veilDrops[v.key];
-                    if (veilCount > 0) group.stats.totalDropValueRaw += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * veilCount);
+                // Najpierw obliczamy drop dla całej sekcji nadrzędnej (Tygodnia/Dnia)
+                Object.values(group.accountsData).forEach(acc => {
+                    acc.sessions.forEach(s => {
+                        petVariants.forEach(v => {
+                            const veilCount = s.log.veilDrops ? s.log.veilDrops[v.key] || 0 : 0;
+                            if (veilCount > 0) groupTotalDropValueRaw += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * veilCount);
 
-                    const pixieCount = group.stats.pixieDrops[v.key];
-                    if (pixieCount > 0) group.stats.totalDropValueRaw += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * pixieCount);
+                            const pixieCount = s.log.pixieDrops ? s.log.pixieDrops[v.key] || 0 : 0;
+                            if (pixieCount > 0) groupTotalDropValueRaw += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * pixieCount);
+                        });
+                    });
                 });
 
-                const totalGroupProfitM = (group.stats.totalNetGemsRaw + group.stats.totalDropValueRaw) / 1_000_000;
+                const totalGroupProfitM = (group.stats.totalNetGemsRaw + groupTotalDropValueRaw) / 1_000_000;
 
+                // Zbieranie wszystkich trafień huge do globalnego podsumowania grupy
                 let groupTotalDropsHTML = '';
+                const globalVeil = {}; const globalPixie = {};
+                Object.values(group.accountsData).forEach(acc => {
+                    acc.sessions.forEach(s => {
+                        petVariants.forEach(v => {
+                            globalVeil[v.key] = (globalVeil[v.key] || 0) + (s.log.veilDrops ? s.log.veilDrops[v.key] || 0 : 0);
+                            globalPixie[v.key] = (globalPixie[v.key] || 0) + (s.log.pixieDrops ? s.log.pixieDrops[v.key] || 0 : 0);
+                        });
+                    });
+                });
+
                 petVariants.forEach(v => {
-                    const vCount = group.stats.veilDrops[v.key];
-                    if (vCount > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Veil: ${vCount}x ${v.label}</span>`;
+                    if (globalVeil[v.key] > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Veil: ${globalVeil[v.key]}x ${v.label}</span>`;
                 });
                 petVariants.forEach(v => {
-                    const pCount = group.stats.pixieDrops[v.key];
-                    if (pCount > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Pixie: ${pCount}x ${v.label}</span>`;
+                    if (globalPixie[v.key] > 0) groupTotalDropsHTML += `<span class="px-2 py-0.5 rounded border text-[11px] font-medium ${v.bg}">Pixie: ${globalPixie[v.key]}x ${v.label}</span>`;
                 });
 
                 let groupHTML = `
@@ -835,57 +839,90 @@
                             <div class="flex flex-col"><span class="text-[10px] text-amber-400 font-bold uppercase">${lang.totalBalance}</span><span class="text-sm font-mono font-black ${totalGroupProfitM >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${totalGroupProfitM >= 0 ? '+' : ''}${totalGroupProfitM.toFixed(2)}M 💎</span></div>
                             ${groupTotalDropsHTML ? `<div class="col-span-full border-t border-slate-900 pt-2 flex flex-wrap items-center gap-1.5"><span class="text-[10px] text-slate-400 font-bold uppercase mr-1">${lang.sumDrop}</span>${groupTotalDropsHTML}</div>` : ''}
                         </div>
-                        <div class="space-y-2 pl-1">
+                        <div class="space-y-3 pl-1">
                 `;
 
-                group.items.forEach(log => {
-                    const lGemsBefore = log.gemsBeforeM * 1_000_000;
-                    const lGemsAfter = log.gemsAfterM * 1_000_000;
-                    const lCost = log.giftsOpened * 40_000;
-                    const lNetGems = (lGemsAfter - lGemsBefore) - lCost;
+                // Renderowanie zunifikowanych bloków kont zgodnie z Twoim projektem (image_a2e4a7.png)
+                const sortedAccounts = Object.values(group.accountsData).sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                    let lDropVal = 0;
-                    let lBadgesHTML = '';
+                sortedAccounts.forEach(acc => {
+                    let accTotalGemsNet = 0;
+                    let accTotalDropVal = 0;
+                    let subRowsHTML = '';
 
-                    petVariants.forEach(v => {
-                        const count = log.veilDrops ? log.veilDrops[v.key] || 0 : 0;
-                        if (count > 0) {
-                            lDropVal += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * count);
-                            lBadgesHTML += `<div class="flex items-center gap-1 px-2 py-0.5 rounded border ${v.bg} text-[10px]"><span>Veil ${v.label} x${count}</span></div>`;
-                        }
-                    });
+                    // Sortujemy tiery w dół (żeby np. Tier 3 był nad Tier 2 jak na Twoim screenie)
+                    acc.sessions.sort((a, b) => b.log.tier - a.log.tier);
 
-                    petVariants.forEach(v => {
-                        const count = log.pixieDrops ? log.pixieDrops[v.key] || 0 : 0;
-                        if (count > 0) {
-                            lDropVal += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * count);
-                            lBadgesHTML += `<div class="flex items-center gap-1 px-2 py-0.5 rounded border ${v.bg} text-[10px]"><span>Pixie ${v.label} x${count}</span></div>`;
-                        }
-                    });
+                    acc.sessions.forEach(s => {
+                        accTotalGemsNet += s.netGemsProfit;
 
-                    const sessionTotalM = (lNetGems + lDropVal) / 1_000_000;
-                    const d = new Date(log.date);
+                        let sDropVal = 0;
+                        let sBadgesHTML = '';
 
-                    groupHTML += `
-                        <div class="bg-slate-900 border border-slate-800/80 rounded-xl p-3 shadow-sm flex flex-col gap-2">
-                            <div class="flex justify-between items-center border-b border-slate-800/50 pb-1.5">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-xs px-2 py-0.5 bg-slate-800 text-slate-300 rounded font-bold">${log.account}</span>
-                                    <span class="text-xs text-slate-500 font-mono">${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}</span>
-                                    <span class="text-[11px] text-slate-400 font-mono">(${log.giftsOpened} ${lang.pcsUnit})</span>
+                        petVariants.forEach(v => {
+                            const count = s.log.veilDrops ? s.log.veilDrops[v.key] || 0 : 0;
+                            if (count > 0) {
+                                sDropVal += (findPetPrice('Huge Veil Horse', v.pt, v.sh) * count);
+                                sBadgesHTML += `<div class="flex items-center gap-1 px-1.5 py-0.5 rounded border ${v.bg} text-[9px]"><span>Veil ${v.label} x${count}</span></div>`;
+                            }
+                        });
+
+                        petVariants.forEach(v => {
+                            const count = s.log.pixieDrops ? s.log.pixieDrops[v.key] || 0 : 0;
+                            if (count > 0) {
+                                sDropVal += (findPetPrice('Huge Mushroom Pixie', v.pt, v.sh) * count);
+                                sBadgesHTML += `<div class="flex items-center gap-1 px-1.5 py-0.5 rounded border ${v.bg} text-[9px]"><span>Pixie ${v.label} x${count}</span></div>`;
+                            }
+                        });
+
+                        accTotalDropVal += sDropVal;
+
+                        const tierColor = s.log.tier === 3 
+                            ? 'bg-slate-800 border-slate-700 text-slate-300' 
+                            : 'bg-emerald-950/80 border-emerald-900/80 text-emerald-400';
+
+                        // Generowanie wewnętrznego podwiersza dla konkretnego tieru
+                        subRowsHTML += `
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] pt-1.5 border-t border-slate-800/40 first:border-t-0 first:pt-0">
+                                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-slate-400">
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded font-bold border ${tierColor}">Tier ${s.log.tier}</span>
+                                    <span class="text-slate-500">(${s.log.giftsOpened} ${lang.pcsUnit})</span>
+                                    <div>Gemy: <span class="text-slate-200">${s.log.gemsBeforeM}M → ${s.log.gemsAfterM}M</span></div>
+                                    <div>Koszt: <span class="text-rose-400">-${(s.giftCostRaw / 1_000_000).toFixed(3)}M</span></div>
+                                    <div>Zysk z gemów: <span class="${s.netGemsProfit >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${s.netGemsProfit >= 0 ? '+' : ''}${(s.netGemsProfit / 1_000_000).toFixed(3)}M</span></div>
                                 </div>
-                                <div class="flex items-center gap-4">
-                                    <div class="text-xs font-mono font-bold"><span class="${sessionTotalM >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${sessionTotalM >= 0 ? '+' : ''}${sessionTotalM.toFixed(2)}M 💎</span></div>
-                                    <button onclick="deleteLog(${log.id})" class="text-[11px] text-slate-600 hover:text-rose-400 font-medium cursor-pointer">${lang.deleteBtn}</button>
+                                <div class="flex items-center gap-3 justify-end">
+                                    <div class="flex flex-wrap gap-1 items-center">${sBadgesHTML ? sBadgesHTML : `<span class="text-[10px] text-slate-600 italic">${lang.noHuge}</span>`}</div>
+                                    <button onclick="deleteLog(${s.log.id})" class="text-[11px] text-slate-600 hover:text-rose-400 font-medium transition cursor-pointer select-none">${lang.deleteBtn}</button>
                                 </div>
                             </div>
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
-                                <div class="flex flex-wrap gap-x-3 font-mono text-slate-400">
-                                    <div>Gemy: <span class="text-slate-300">${log.gemsBeforeM}M → ${log.gemsAfterM}M</span></div>
-                                    <div>${lang.boxCost.split(' ')[0]}: <span class="text-rose-400">-${(lCost / 1_000_000).toFixed(2)}M</span></div>
-                                    <div>${lang.gemProfit}: <span class="${lNetGems >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${(lNetGems / 1_000_000).toFixed(2)}M</span></div>
+                        `;
+                    });
+
+                    const finalAccountProfitM = (accTotalGemsNet + accTotalDropVal) / 1_000_000;
+                    const parsedDate = new Date(acc.date);
+                    const dateBadge = `${String(parsedDate.getDate()).padStart(2, '0')}.${String(parsedDate.getMonth() + 1).padStart(2, '0')}`;
+
+                    // Główny kontener zbierający dane konto z danego dnia w jeden klocek
+                    groupHTML += `
+                        <div class="bg-slate-900 border border-slate-800/80 rounded-xl p-3.5 shadow-sm flex flex-col gap-3">
+                            <!-- NAGŁÓWEK KLOCKA (Konto + Całkowity Zarobek z Dnia) -->
+                            <div class="flex justify-between items-center border-b border-slate-800/60 pb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs px-2.5 py-0.5 bg-slate-800 border border-slate-700 text-slate-200 rounded font-bold tracking-wide">${acc.accountName}</span>
+                                    <span class="text-xs text-slate-500 font-mono font-semibold">${dateBadge}</span>
                                 </div>
-                                <div class="flex flex-wrap gap-1 items-center">${lBadgesHTML ? lBadgesHTML : `<span class="text-[10px] text-slate-600 italic">${lang.noHuge}</span>`}</div>
+                                <div class="text-xs font-mono font-black tracking-wide">
+                                    <span class="${finalAccountProfitM >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
+                                        ${finalAccountProfitM >= 0 ? '+' : ''}${finalAccountProfitM.toFixed(2)}M
+                                    </span>
+                                    <span class="text-slate-400 ml-0.5">💎</span>
+                                </div>
+                            </div>
+                            
+                            <!-- LISTA TIERÓW (PODWIERSZE) -->
+                            <div class="space-y-2.5">
+                                ${subRowsHTML}
                             </div>
                         </div>
                     `;
@@ -933,6 +970,7 @@
             e.preventDefault();
 
             const account = document.getElementById('account-input').value;
+            const tier = parseInt(document.getElementById('tier-input').value) || 2;
             const date = document.getElementById('session-date').value;
             const giftsOpened = parseInt(document.getElementById('gifts-opened').value) || 0;
             const gemsBeforeM = parseFloat(document.getElementById('gems-before').value) || 0;
@@ -956,7 +994,7 @@
                 shinyRb: parseInt(document.getElementById('qty-pixie-shinyRb').value) || 0
             };
 
-            const newLog = { account, date, giftsOpened, gemsBeforeM, gemsAfterM, veilDrops, pixieDrops };
+            const newLog = { account, tier, date, giftsOpened, gemsBeforeM, gemsAfterM, veilDrops, pixieDrops };
 
             await saveOrUpdateLogToDB(newLog);
             await updateFiltersAndCalendar();
@@ -973,7 +1011,6 @@
         });
 
         window.deleteLog = async function(id) {
-            // Usunięto warunek confirm() - kasowanie odbywa się natychmiastowo
             await deleteLogFromDB(id);
             await updateFiltersAndCalendar();
             renderHistory();
