@@ -594,7 +594,7 @@
         <input type="text" id="valueInput" inputmode="decimal" placeholder="np. 10.5" autocomplete="off">
         <button id="saveBtn">Zapisz</button>
       </div>
-      <div class="entry-hint">Format: <b>10.5</b> = 10,5M &nbsp;·&nbsp; <b>2.3k</b> = 2,3B &nbsp;·&nbsp; <b>1.5t</b> = 1,5T &nbsp;·&nbsp; <b>1.2q</b> = 1,2Q</div>
+      <div class="entry-hint">Format: <b>1k</b> = 1 000 &nbsp;·&nbsp; <b>1m</b> = 1 000 000 &nbsp;·&nbsp; <b>1b</b> = 1 000 000 000 &nbsp;·&nbsp; <b>1t</b> = 1 000 000 000 000</div>
       <label class="reset-check" id="resetCheckLabel">
         <input type="checkbox" id="resetCheck">
         🧹 Wyczyściłem farmę (wpis po resecie)
@@ -747,11 +747,11 @@ function todayStr(){
 function parseShorthand(raw){
   if(!raw) return null;
   let s = raw.trim().toLowerCase().replace(',', '.');
-  let mult = 1_000_000;
-  if(s.endsWith('q')){ mult = 1_000_000_000_000_000; s = s.slice(0,-1); }
-  else if(s.endsWith('t')){ mult = 1_000_000_000_000; s = s.slice(0,-1); }
-  else if(s.endsWith('k')){ mult = 1_000_000_000; s = s.slice(0,-1); }
+  let mult = 1;
+  if(s.endsWith('t')){ mult = 1_000_000_000_000; s = s.slice(0,-1); }
+  else if(s.endsWith('b')){ mult = 1_000_000_000; s = s.slice(0,-1); }
   else if(s.endsWith('m')){ mult = 1_000_000; s = s.slice(0,-1); }
+  else if(s.endsWith('k')){ mult = 1_000; s = s.slice(0,-1); }
   const num = parseFloat(s);
   if(isNaN(num)) return null;
   return Math.round(num * mult);
@@ -766,12 +766,11 @@ function formatShort(n){
   if(n === null || n === undefined) return '—';
   const abs = Math.abs(n);
   const sign = n < 0 ? '-' : '';
-  if(abs >= 1_000_000_000_000_000) return sign + (abs/1_000_000_000_000_000).toFixed(2) + 'Q';
   if(abs >= 1_000_000_000_000) return sign + (abs/1_000_000_000_000).toFixed(2) + 'T';
   if(abs >= 1_000_000_000) return sign + (abs/1_000_000_000).toFixed(2) + 'B';
   if(abs >= 1_000_000) return sign + (abs/1_000_000).toFixed(2) + 'M';
-  if(abs >= 1_000) return sign + (abs/1_000).toFixed(1) + 'k';
-  return sign + abs;
+  if(abs >= 1_000) return sign + (abs/1_000).toFixed(2) + 'K';
+  return sign + Math.round(abs);
 }
 
 function entriesForAccount(accId){
@@ -1118,10 +1117,12 @@ function renderHistory(){
 function valueToEditableShorthand(n){
   const abs = Math.abs(n);
   const sign = n < 0 ? '-' : '';
-  if(abs >= 1_000_000_000_000_000) return sign + (abs/1_000_000_000_000_000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'') + 'q';
-  if(abs >= 1_000_000_000_000) return sign + (abs/1_000_000_000_000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'') + 't';
-  if(abs >= 1_000_000_000) return sign + (abs/1_000_000_000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'') + 'k';
-  return sign + (abs/1_000_000).toFixed(3).replace(/0+$/,'').replace(/\.$/,'');
+  const fmt = (v) => v.toFixed(3).replace(/0+$/,'').replace(/\.$/,'');
+  if(abs >= 1_000_000_000_000) return sign + fmt(abs/1_000_000_000_000) + 't';
+  if(abs >= 1_000_000_000) return sign + fmt(abs/1_000_000_000) + 'b';
+  if(abs >= 1_000_000) return sign + fmt(abs/1_000_000) + 'm';
+  if(abs >= 1_000) return sign + fmt(abs/1_000) + 'k';
+  return sign + Math.round(abs);
 }
 
 function startEditCell(cell){
