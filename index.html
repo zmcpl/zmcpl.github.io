@@ -687,6 +687,8 @@
       </div>
     </div>
 
+    <div id="dbWarningBanner" style="display:none;background:rgba(255,107,107,0.1);border:1px solid var(--danger);color:var(--danger);border-radius:var(--radius);padding:11px 14px;font-size:12.5px;line-height:1.5;"></div>
+
     <div class="stat-row" id="statRow"></div>
 
     <div class="chart-card">
@@ -759,6 +761,7 @@ const STORE = 'entries';
 const ACC_STORE = 'accounts';
 const KEY_STORE = 'keyEntries';
 let db = null;
+let dbAvailable = true;
 
 function openDB(){
   return new Promise((resolve, reject) => {
@@ -787,7 +790,24 @@ function txStore(name, mode){
   return tx.objectStore(name);
 }
 
+const FALLBACK_PREFIX = 'ps99_fallback_';
+
+function fallbackReadAll(name){
+  try{
+    const raw = localStorage.getItem(FALLBACK_PREFIX + name);
+    if(!raw) return {};
+    return JSON.parse(raw) || {};
+  }catch(e){ return {}; }
+}
+
+function fallbackWriteAll(name, obj){
+  try{
+    localStorage.setItem(FALLBACK_PREFIX + name, JSON.stringify(obj));
+  }catch(e){ /* localStorage may be full or unavailable, ignore */ }
+}
+
 function dbGetAll(name){
+  if(!db) return Promise.resolve(Object.values(fallbackReadAll(name)));
   return new Promise((resolve, reject) => {
     const req = txStore(name, 'readonly').getAll();
     req.onsuccess = () => resolve(req.result || []);
@@ -796,6 +816,12 @@ function dbGetAll(name){
 }
 
 function dbPut(name, entry){
+  if(!db){
+    const all = fallbackReadAll(name);
+    all[entry.id] = entry;
+    fallbackWriteAll(name, all);
+    return Promise.resolve();
+  }
   return new Promise((resolve, reject) => {
     const req = txStore(name, 'readwrite').put(entry);
     req.onsuccess = () => resolve();
@@ -804,6 +830,12 @@ function dbPut(name, entry){
 }
 
 function dbDelete(name, id){
+  if(!db){
+    const all = fallbackReadAll(name);
+    delete all[id];
+    fallbackWriteAll(name, all);
+    return Promise.resolve();
+  }
   return new Promise((resolve, reject) => {
     const req = txStore(name, 'readwrite').delete(id);
     req.onsuccess = () => resolve();
@@ -812,6 +844,10 @@ function dbDelete(name, id){
 }
 
 function dbClear(name){
+  if(!db){
+    fallbackWriteAll(name, {});
+    return Promise.resolve();
+  }
   return new Promise((resolve, reject) => {
     const req = txStore(name, 'readwrite').clear();
     req.onsuccess = () => resolve();
@@ -1018,6 +1054,13 @@ function renderKeysChart(){
   const emptyState = document.getElementById('keysEmptyState');
   if(!ctx) return;
 
+  if(typeof Chart === 'undefined'){
+    emptyState.style.display = 'block';
+    emptyState.innerHTML = '<i class="ti ti-alert-triangle"></i>Biblioteka wykresów (Chart.js) nie załadowała się z CDN.';
+    ctx.style.display = 'none';
+    return;
+  }
+
   const rangeStart = keysRangeStartDate();
   const allDates = new Set();
   accounts.forEach(a => keysEntriesForAccount(a.id).forEach(e => {
@@ -1174,6 +1217,22 @@ function dailyDeltas(list){
   return result;
 }
 
+function keysDailyDeltas(list){
+  const result = [];
+  for(let i = 0; i < list.length; i++){
+    const e = list[i];
+    const prevValue = i === 0 ? null : result[i-1].value;
+    const hasVal = e.value !== null && e.value !== undefined;
+    const hasPrev = prevValue !== null && prevValue !== undefined;
+    result.push({
+      date: e.date,
+      value: hasVal ? e.value : null,
+      delta: (hasVal && hasPrev) ? (e.value - prevValue) : null,
+    });
+  }
+  return result;
+}
+
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -1288,6 +1347,15 @@ function renderStats(){
   const totalKeys = accounts.reduce((sum, a) => sum + (a.keys || 0), 0);
   const totalKeysValue = keyPrice !== null ? totalKeys * keyPrice : null;
   wrap.appendChild(statCard('Łącznie kluczy MVP Key', totalKeys + (totalKeysValue !== null ? ' (~' + formatShort(totalKeysValue) + ')' : ''), null));
+
+  let todayKeysSum = 0, hasTodayKeys = false;
+  accounts.forEach(a => {
+    const list = keysEntriesForAccount(a.id);
+    const wd = keysDailyDeltas(list);
+    const t = wd.find(e => e.date === todayStr());
+    if(t && t.delta !== null){ todayKeysSum += t.delta; hasTodayKeys = true; }
+  });
+  wrap.appendChild(statCard('Zarobek z kluczy dziś', hasTodayKeys ? formatShort(todayKeysSum) : '—', hasTodayKeys ? todayKeysSum : null));
 }
 
 function statCard(label, value, deltaForColor){
@@ -1321,6 +1389,13 @@ const CHART_PALETTE = ['#7ee787','#85B7EB','#F0997B','#ED93B1','#FAC775','#9FE1C
 function renderChart(){
   const ctx = document.getElementById('mainChart');
   const emptyState = document.getElementById('emptyState');
+
+  if(typeof Chart === 'undefined'){
+    emptyState.style.display = 'block';
+    emptyState.innerHTML = '<i class="ti ti-alert-triangle"></i>Biblioteka wykresów (Chart.js) nie załadowała się z CDN. Sprawdź połączenie z internetem lub odblokuj cdnjs.cloudflare.com.';
+    ctx.style.display = 'none';
+    return;
+  }
 
   const rangeStart = rangeStartDate();
   const allDates = new Set();
@@ -1687,7 +1762,16 @@ function setupEvents(){
 async function init(){
   initTheme();
   loadCachedKeyPrice();
-  db = await openDB();
+  setupEvents(); // podpinamy przyciski NAJPIERW, żeby UI działał nawet jeśli baza padnie
+
+  try{
+    db = await openDB();
+  }catch(err){
+    console.error('Błąd IndexedDB, przełączam na zapasowy localStorage:', err);
+    db = null;
+    dbAvailable = false;
+  }
+
   entries = await dbGetAll(STORE);
   keyEntries = await dbGetAll(KEY_STORE);
   accounts = await dbGetAll(ACC_STORE);
@@ -1695,15 +1779,24 @@ async function init(){
     accounts = defaultAccounts();
     for(const a of accounts) await dbPut(ACC_STORE, a);
   }
+
   accounts.forEach(a => { if(typeof a.keys !== 'number') a.keys = 0; });
   accCounter = accounts.reduce((max, a) => {
     const n = parseInt(String(a.id).replace('acc',''), 10);
     return isNaN(n) ? max : Math.max(max, n);
   }, 0);
   activeAccountId = accounts[0].id;
-  setupEvents();
   renderAll();
   fetchKeyPrice(false);
+
+  if(!dbAvailable){
+    showToast('⚠️ IndexedDB niedostępne — dane zapisywane w trybie zapasowym (localStorage)');
+    const banner = document.getElementById('dbWarningBanner');
+    if(banner){
+      banner.style.display = 'block';
+      banner.innerHTML = '⚠️ <b>Tryb zapasowy zapisu:</b> IndexedDB niedostępne w tym oknie (np. plik otwarty bezpośrednio z dysku przez podwójne kliknięcie, tryb prywatny/incognito, albo rozszerzenie blokujące). Dane zapisują się teraz w <code>localStorage</code> zamiast IndexedDB — to działa, ale ma mniejszy limit pojemności. Dla pełnej funkcjonalności otwórz plik przez hosting (np. GitHub Pages) albo lokalny serwer (np. <code>python3 -m http.server</code>).';
+    }
+  }
 }
 
 init().catch(err => {
