@@ -343,7 +343,6 @@
   </div>
 
   <div class="grid">
-    <!-- LEFT: new deposit -->
     <div>
       <div class="card">
         <h2>Nowa lokata</h2>
@@ -370,7 +369,6 @@
       </div>
     </div>
 
-    <!-- RIGHT: active deposits -->
     <div>
       <div class="card">
         <h2>Aktywne lokaty</h2>
@@ -400,19 +398,19 @@
 </div>
 
 <script>
-/* ================= STORAGE (IndexedDB + fallback localStorage) ================= */
+
 const STORAGE_KEY = "lokaty_bank_state_v1";
 const DB_NAME = "lokatyBankDB";
 const DB_STORE = "state";
 
-const DAILY_RATE = 0.005;          // 0.5% / dobę
-const HOURLY_RATE = DAILY_RATE / 24; // doliczane co godzinę
+const DAILY_RATE = 0.005;
+const HOURLY_RATE = DAILY_RATE / 24;
 
 function defaultState(){
   return {
     baseBalance: 22256210661,
     baseTimestamp: Date.now(),
-    deposits: [],   // {id,name,amount,days,total,profit,bankShare,clientShare,start,end,status}
+    deposits: [],
     history: []
   };
 }
