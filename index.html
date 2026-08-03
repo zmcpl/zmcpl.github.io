@@ -2019,6 +2019,10 @@ function computeTodaySummary(){
   const totalToday = gemsToday + keysToday;
   const divisor = farmedCount > 0 ? farmedCount : null;
 
+  const gemsBalance = accounts.reduce((sum, a) => sum + (latestValue(a.id) || 0), 0);
+  const keysBalance = accounts.reduce((sum, a) => sum + (a.keys || 0), 0);
+  const keysBalanceValue = keyPrice !== null ? keysBalance * keyPrice : null;
+
   return {
     date,
     gemsToday, hasGems,
@@ -2028,6 +2032,7 @@ function computeTodaySummary(){
     avgGems: divisor ? gemsToday / divisor : null,
     avgKeys: divisor ? keysToday / divisor : null,
     avgTotal: divisor ? totalToday / divisor : null,
+    gemsBalance, keysBalance, keysBalanceValue,
   };
 }
 
@@ -2206,6 +2211,26 @@ async function buildShareCanvas(stats){
   drawStatChip(ctx, pad + ipad + (avgChipW + 20) * 2, avgY, avgChipW, avgChipH, {
     icon: 'Σ', label: 'razem', color: blue,
     value: stats.avgTotal !== null ? formatShort(stats.avgTotal) : '—',
+  });
+
+  // aktualny stan salda
+  cy = avgY + avgChipH + 30;
+  ctx.fillStyle = textDim;
+  ctx.font = '600 25px Inter, sans-serif';
+  ctx.fillText('AKTUALNY STAN', pad + ipad, cy);
+
+  cy += 22;
+  const balChipH = 96;
+  const keysValueLabel = stats.keysBalanceValue !== null
+    ? formatShort(stats.keysBalance) + ' (~' + formatShort(stats.keysBalanceValue) + ')'
+    : formatShort(stats.keysBalance);
+  drawStatChip(ctx, pad + ipad, cy, chipW, balChipH, {
+    icon: '💎', label: 'SALDO GEMÓW', color: mint,
+    value: formatShort(stats.gemsBalance),
+  });
+  drawStatChip(ctx, pad + ipad + chipW + 22, cy, chipW, balChipH, {
+    icon: '🔑', label: 'SALDO KLUCZY', color: gold,
+    value: keysValueLabel,
   });
 
   // stopka
