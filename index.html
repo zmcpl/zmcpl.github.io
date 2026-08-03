@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0045)file:///C:/Users/siorb/Downloads/index_2.html -->
+<html lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PS99 - Wydajność</title>
 <meta name="description" content="Tracker zarobków farm w Pet Simulator 99 — śledź codzienne stany kont, przeglądaj wykresy i historię wpisów.">
 
 <!-- PWA -->
-<link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="file:///C:/Users/siorb/Downloads/manifest.json">
 <meta name="theme-color" content="#8fe8c9">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="file:///C:/Users/siorb/Downloads/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="file:///C:/Users/siorb/Downloads/icon-512.png">
 
 <!-- Open Graph (Discord, Facebook, Messenger) -->
 <meta property="og:type" content="website">
@@ -1045,109 +1045,6 @@
     z-index:50;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(-6px) scale(1);}
-
-  /* ===== share preview popup ===== */
-  .share-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(10,7,20,.62);
-    backdrop-filter:blur(3px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    z-index:200;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .22s var(--ease);
-  }
-  .share-overlay.show{opacity:1;pointer-events:auto;}
-  .share-popup{
-    background:var(--panel);
-    border:1px solid var(--border-2);
-    border-radius:16px;
-    padding:18px;
-    max-width:min(92vw,560px);
-    max-height:90vh;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    box-shadow:0 24px 60px rgba(0,0,0,.45);
-    transform:translateY(10px) scale(.97);
-    transition:transform .22s var(--ease);
-  }
-  .share-overlay.show .share-popup{transform:translateY(0) scale(1);}
-  .share-popup-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-  }
-  .share-popup-head h3{
-    margin:0;
-    font-family:var(--font-display);
-    font-size:15px;
-    font-weight:600;
-    color:var(--text);
-  }
-  .share-popup-close{
-    background:none;
-    border:none;
-    color:var(--text-faint);
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:28px;
-    height:28px;
-    border-radius:8px;
-    transition:background .15s var(--ease), color .15s var(--ease);
-  }
-  .share-popup-close:hover{background:var(--panel-2);color:var(--text);}
-  .share-popup-imgwrap{
-    overflow:auto;
-    border-radius:10px;
-    border:1px solid var(--border);
-    background:var(--panel-2);
-    display:flex;
-  }
-  .share-popup-imgwrap img{
-    width:100%;
-    display:block;
-  }
-  .share-popup-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .share-popup-btn{
-    flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:7px;
-    border:none;
-    border-radius:9px;
-    padding:11px 14px;
-    font-family:var(--font-body);
-    font-weight:700;
-    font-size:12.5px;
-    cursor:pointer;
-    transition:transform .15s var(--ease), box-shadow .15s var(--ease);
-  }
-  .share-popup-btn svg{flex-shrink:0;}
-  .share-popup-btn:active{transform:scale(.97);}
-  .share-popup-btn.primary{
-    background:linear-gradient(155deg,var(--accent-entry-2),var(--accent-entry) 55%,var(--accent-ocr) 130%);
-    color:var(--btn-text);
-  }
-  .share-popup-btn.primary:hover{box-shadow:0 4px 18px rgba(var(--accent-entry-rgb),.4);}
-  .share-popup-btn.secondary{
-    background:var(--panel-2);
-    border:1px solid var(--border-2);
-    color:var(--text);
-  }
-  .share-popup-btn.secondary:hover{background:var(--border);}
 </style>
 </head>
 <body>
@@ -1164,79 +1061,58 @@
     </div>
 
     <div>
-      <div class="section-label" id="accountsLabel">Konta</div>
-      <div class="account-list" id="accountList"></div>
+      <div class="section-label" id="accountsLabel">Konta (2)</div>
+      <div class="account-list" id="accountList"><div class="account-row active">
+      <span class="acc-dot"></span>
+      <input class="acc-name" value="Ziorbek" spellcheck="false" data-id="acc1">
+      <span class="acc-keys" title="Liczba kluczy MVP Key">🔑45</span>
+      
+      <span class="acc-value">399.00M</span>
+      <button class="acc-remove" data-id="acc1" title="Usuń konto" aria-label="Usuń Ziorbek">×</button>
+    </div><div class="account-row">
+      <span class="acc-dot"></span>
+      <input class="acc-name" value="Forgoten2009" spellcheck="false" data-id="acc2">
+      <span class="acc-keys" title="Liczba kluczy MVP Key">🔑0</span>
+      
+      <span class="acc-value">2.80M</span>
+      <button class="acc-remove" data-id="acc2" title="Usuń konto" aria-label="Usuń Forgoten2009">×</button>
+    </div></div>
       <button class="add-account-btn" id="addAccountBtn"><i class="ti ti-plus" style="font-size:14px;" aria-hidden="true"></i>Dodaj konto</button>
     </div>
 
     <div class="sidebar-panels" id="sidebarPanels">
 
-    <div class="entry-card sidebar-panel" draggable="true" data-panel-id="entry">
-      <div class="panel-head">
-        <span class="panel-grip" title="Przeciągnij, aby zmienić kolejność">⠿⠿</span>
-        <div class="panel-move-btns">
-          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
-          <button class="panel-move-btn" data-dir="down" title="Przesuń w dół"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
-        </div>
-      </div>
-      <label>Zapisz dzisiejszy stan dla <span class="acc-tag" id="entryAccLabel">—</span></label>
-      <div class="entry-row">
-        <input type="text" id="valueInput" inputmode="decimal" placeholder="np. 10.5" autocomplete="off">
-        <button id="saveBtn">Zapisz</button>
-      </div>
-      <div class="entry-hint">Format: <b>1k</b> = 1 000 &nbsp;·&nbsp; <b>1m</b> = 1 000 000 &nbsp;·&nbsp; <b>1b</b> = 1 000 000 000 &nbsp;·&nbsp; <b>1t</b> = 1 000 000 000 000</div>
-      <label class="reset-check" id="resetCheckLabel">
-        <input type="checkbox" id="resetCheck">
-        🧹 Wyczyściłem farmę (wpis po resecie)
-      </label>
-      <div class="entry-status" id="entryStatus"></div>
-    </div>
+    
 
-    <div class="keys-card sidebar-panel" draggable="true" data-panel-id="keys">
-      <div class="panel-head">
-        <span class="panel-grip" title="Przeciągnij, aby zmienić kolejność">⠿⠿</span>
-        <div class="panel-move-btns">
-          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
-          <button class="panel-move-btn" data-dir="down" title="Przesuń w dół"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
-        </div>
-      </div>
-      <label>🔑 Liczba kluczy MVP Key na <span class="acc-tag" id="keysAccLabel">—</span></label>
-      <div class="entry-row">
-        <input type="number" id="keysInput" min="0" step="1" inputmode="numeric" placeholder="np. 5" autocomplete="off">
-        <button id="keysSaveBtn">Zapisz</button>
-      </div>
-      <div class="key-price-note">
-        <span id="keyPriceNote">Cena klucza: —</span>
-        <button id="refreshKeyPriceBtn" title="Odśwież cenę z API">⟳ Odśwież cenę</button>
-      </div>
-      <div class="keys-status" id="keysStatus"></div>
-    </div>
+    
+
+    
 
     <div class="ocr-card sidebar-panel" draggable="true" data-panel-id="ocr">
       <div class="panel-head">
         <span class="panel-grip" title="Przeciągnij, aby zmienić kolejność">⠿⠿</span>
         <div class="panel-move-btns">
-          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
+          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę" disabled=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
           <button class="panel-move-btn" data-dir="down" title="Przesuń w dół"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
         </div>
       </div>
       <label>📸 OCR ze screenshotów <span style="color:var(--text-faint);">(nick + saldo)</span></label>
       <div class="ocr-drops">
         <div class="ocr-drop" id="ocrDropNick" tabindex="0" role="button" aria-label="Wgraj zrzut z nickiem">
-          <input type="file" accept="image/*" id="ocrFileNick" hidden>
-          <img class="ocr-drop-preview" id="ocrNickPreview" hidden alt="">
+          <input type="file" accept="image/*" id="ocrFileNick" hidden="">
+          <img class="ocr-drop-preview" id="ocrNickPreview" hidden="" alt="">
           <span class="ocr-drop-icon" id="ocrNickIcon"><i class="ti ti-user-circle"></i></span>
           <span class="ocr-drop-txt" id="ocrNickTxt">Zrzut z nickiem<br><small>klik / przeciągnij / wklej</small></span>
         </div>
         <div class="ocr-drop" id="ocrDropBal" tabindex="0" role="button" aria-label="Wgraj zrzut z saldem">
-          <input type="file" accept="image/*" id="ocrFileBal" hidden>
-          <img class="ocr-drop-preview" id="ocrBalPreview" hidden alt="">
+          <input type="file" accept="image/*" id="ocrFileBal" hidden="">
+          <img class="ocr-drop-preview" id="ocrBalPreview" hidden="" alt="">
           <span class="ocr-drop-icon" id="ocrBalIcon"><i class="ti ti-coin"></i></span>
           <span class="ocr-drop-txt" id="ocrBalTxt">Zrzut z saldem<br><small>klik / przeciągnij / wklej</small></span>
         </div>
       </div>
-      <button class="ocr-run-btn" id="ocrRunBtn" disabled><i class="ti ti-scan"></i> Rozpoznaj tekst</button>
-      <div class="ocr-result" id="ocrResult" hidden>
+      <button class="ocr-run-btn" id="ocrRunBtn" disabled=""><i class="ti ti-scan"></i> Rozpoznaj tekst</button>
+      <div class="ocr-result" id="ocrResult" hidden="">
         <div class="ocr-result-row">
           <label>Konto</label>
           <select id="ocrAccSelect"></select>
@@ -1248,9 +1124,44 @@
         <button class="ocr-confirm-btn" id="ocrConfirmBtn">Zapisz wykryty wpis</button>
       </div>
       <div class="ocr-status" id="ocrStatus"></div>
-    </div>
-
-    </div>
+    </div><div class="entry-card sidebar-panel" draggable="true" data-panel-id="entry">
+      <div class="panel-head">
+        <span class="panel-grip" title="Przeciągnij, aby zmienić kolejność">⠿⠿</span>
+        <div class="panel-move-btns">
+          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
+          <button class="panel-move-btn" data-dir="down" title="Przesuń w dół"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+        </div>
+      </div>
+      <label>Zapisz dzisiejszy stan dla <span class="acc-tag" id="entryAccLabel">Ziorbek</span></label>
+      <div class="entry-row">
+        <input type="text" id="valueInput" inputmode="decimal" placeholder="np. 10.5" autocomplete="off">
+        <button id="saveBtn">Zapisz</button>
+      </div>
+      <div class="entry-hint">Format: <b>1k</b> = 1 000 &nbsp;·&nbsp; <b>1m</b> = 1 000 000 &nbsp;·&nbsp; <b>1b</b> = 1 000 000 000 &nbsp;·&nbsp; <b>1t</b> = 1 000 000 000 000</div>
+      <label class="reset-check" id="resetCheckLabel">
+        <input type="checkbox" id="resetCheck">
+        🧹 Wyczyściłem farmę (wpis po resecie)
+      </label>
+      <div class="entry-status" id="entryStatus"></div>
+    </div><div class="keys-card sidebar-panel" draggable="true" data-panel-id="keys">
+      <div class="panel-head">
+        <span class="panel-grip" title="Przeciągnij, aby zmienić kolejność">⠿⠿</span>
+        <div class="panel-move-btns">
+          <button class="panel-move-btn" data-dir="up" title="Przesuń w górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"></polyline></svg></button>
+          <button class="panel-move-btn" data-dir="down" title="Przesuń w dół" disabled=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+        </div>
+      </div>
+      <label>🔑 Liczba kluczy MVP Key na <span class="acc-tag" id="keysAccLabel">Ziorbek</span></label>
+      <div class="entry-row">
+        <input type="number" id="keysInput" min="0" step="1" inputmode="numeric" placeholder="np. 5" autocomplete="off">
+        <button id="keysSaveBtn">Zapisz</button>
+      </div>
+      <div class="key-price-note">
+        <span id="keyPriceNote" title="Kliknij, aby wpisać cenę ręcznie" style="cursor: pointer;">Cena MVP Key: 604&nbsp;295 (aktualizacja: 4.08.2026, 00:43:45)</span>
+        <button id="refreshKeyPriceBtn" title="Odśwież cenę z API">⟳ Odśwież cenę</button>
+      </div>
+      <div class="keys-status" id="keysStatus"></div>
+    </div></div>
 
     <div class="sidebar-foot">
       <button class="theme-btn" id="themeBtn">
@@ -1266,7 +1177,7 @@
     <div class="topbar">
       <div>
         <h1>Stan farm — przegląd</h1>
-        <div class="sub" id="subLine">Wybierz konto z listy i zapisz dzisiejszą wartość</div>
+        <div class="sub" id="subLine">4 wpisów łącznie na 2 kontach</div>
       </div>
       <button class="share-btn" id="shareBtn">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"></line><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"></line></svg>
@@ -1276,11 +1187,11 @@
 
     <div id="dbWarningBanner" style="display:none;background:rgba(255,107,107,0.1);border:1px solid var(--danger);color:var(--danger);border-radius:var(--radius);padding:11px 14px;font-size:12.5px;line-height:1.5;"></div>
 
-    <div class="stat-row" id="statRow"></div>
+    <div class="stat-row" id="statRow"><div class="stat"><div class="lbl">Suma wszystkich kont</div><div class="val ">401.80M</div></div><div class="stat"><div class="lbl">Konta z danymi</div><div class="val ">2 / 2</div></div><div class="stat"><div class="lbl">Łączny zarobek dziś</div><div class="val ">—</div></div><div class="stat"><div class="lbl">Najwyższe konto</div><div class="val ">Ziorbek</div></div><div class="stat"><div class="lbl">Łącznie kluczy MVP Key</div><div class="val ">45 (~27.19M)</div></div><div class="stat"><div class="lbl">Zarobek z kluczy dziś</div><div class="val ">—</div></div></div>
 
     <div class="chart-card">
       <div class="chart-card-head">
-        <h2 id="chartTitle">Stan konta w czasie</h2>
+        <h2 id="chartTitle">Stan wszystkich kont</h2>
         <div class="chart-controls">
           <div class="range-toggle" id="rangeToggle">
             <button data-range="week">Tydzień</button>
@@ -1290,8 +1201,12 @@
           </div>
         </div>
       </div>
-      <div id="chartLegend" style="display:flex;flex-wrap:wrap;gap:10px 16px;margin:2px 0 14px;"></div>
-      <div class="chart-wrap"><canvas id="mainChart" role="img" aria-label="Wykres stanu kont w czasie"></canvas></div>
+      <div id="chartLegend" style="display:flex;flex-wrap:wrap;gap:10px 16px;margin:2px 0 14px;"><span style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-dim);">
+      <span style="width:9px;height:9px;border-radius:2px;background:#7ee787;flex-shrink:0;"></span>Ziorbek<span style="color:var(--text-faint);">458.00M</span>
+    </span><span style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-dim);">
+      <span style="width:9px;height:9px;border-radius:2px;background:#85B7EB;flex-shrink:0;"></span>Forgoten2009<span style="color:var(--text-faint);">2.80M</span>
+    </span></div>
+      <div class="chart-wrap"><canvas id="mainChart" role="img" aria-label="Wykres stanu kont w czasie" style="display: block; box-sizing: border-box; height: 340px; width: 1527px;" width="1527" height="340"></canvas></div>
       <div class="empty-state" id="emptyState" style="display:none;">
         <i class="ti ti-chart-line"></i>
         Brak wpisów. Wpisz wartość po lewej, żeby zacząć śledzić farmę.
@@ -1310,8 +1225,10 @@
           </div>
         </div>
       </div>
-      <div id="keysChartLegend" style="display:flex;flex-wrap:wrap;gap:10px 16px;margin:2px 0 14px;"></div>
-      <div class="chart-wrap" style="height:280px;"><canvas id="keysChart" role="img" aria-label="Wykres wartości kluczy w czasie"></canvas></div>
+      <div id="keysChartLegend" style="display:flex;flex-wrap:wrap;gap:10px 16px;margin:2px 0 14px;"><span style="display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-dim);">
+      <span style="width:9px;height:9px;border-radius:2px;background:#7ee787;flex-shrink:0;"></span>Ziorbek<span style="color:var(--text-faint);">38.11M</span>
+    </span></div>
+      <div class="chart-wrap" style="height:280px;"><canvas id="keysChart" role="img" aria-label="Wykres wartości kluczy w czasie" style="display: block; box-sizing: border-box; height: 280px; width: 1527px;" width="1527" height="280"></canvas></div>
       <div class="empty-state" id="keysEmptyState" style="display:none;">
         <i class="ti ti-key"></i>
         Brak zapisanych wartości kluczy. Ustaw liczbę kluczy po lewej i kliknij "Zapisz", aby zacząć śledzić.
@@ -1327,7 +1244,7 @@
           <button data-filter="all">Wszystko</button>
         </div>
       </div>
-      <div id="historyTable" style="overflow-x:auto;"></div>
+      <div id="historyTable" style="overflow-x:auto;"><div class="empty-state" style="padding:24px 0;">Brak wpisów dziś — <button onclick="document.querySelector(&#39;#historyFilter [data-filter=all]&#39;).click()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:13px;padding:0;">pokaż wszystkie</button></div></div>
     </div>
   </main>
 
@@ -1335,32 +1252,11 @@
 
 <div class="toast" id="toast"></div>
 
-<div class="share-overlay" id="shareOverlay">
-  <div class="share-popup">
-    <div class="share-popup-head">
-      <h3>Podsumowanie dnia</h3>
-      <button class="share-popup-close" id="sharePopupCloseX" aria-label="Zamknij">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-    </div>
-    <div class="share-popup-imgwrap">
-      <img id="sharePopupImg" alt="Podsumowanie statystyk PS99">
-    </div>
-    <div class="share-popup-actions">
-      <button class="share-popup-btn primary" id="sharePopupCopy">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        <span>Kopiuj obraz</span>
-      </button>
-      <button class="share-popup-btn secondary" id="sharePopupClose">Zamknij</button>
-    </div>
-  </div>
-</div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.1.0/iconfont/tabler-icons.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<link rel="stylesheet" href="./index_files/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/chart.umd.js.pobrane"></script>
+<script src="./index_files/tesseract.min.js.pobrane"></script>
 <script>
 (function(){
 
@@ -1811,7 +1707,7 @@ function dailyDeltas(list){
   for(let i = 0; i < list.length; i++){
     const e = list[i];
     if(e.isReset && i > 0){
-      offset = result[i-1].balance; // skumulowany stan tuż przed resetem
+      offset = result[i-1].balance;
     }
     const cumulative = offset + e.value;
     const prevBalance = i === 0 ? null : result[i-1].balance;
@@ -1983,7 +1879,6 @@ function statCard(label, value, deltaForColor){
   return div;
 }
 
-/* ===== Udostępnij dzisiejsze statystyki (obrazek PNG) ===== */
 function cssVar(name, fallback){
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   return v || fallback;
@@ -2050,18 +1945,22 @@ function drawStatChip(ctx, x, y, w, h, opts){
   ctx.strokeStyle = color + '55';
   ctx.stroke();
 
+  const midY = y + h / 2;
+
+  ctx.textBaseline = 'middle';
   ctx.fillStyle = color;
-  ctx.font = '40px sans-serif';
-  ctx.textBaseline = 'top';
-  ctx.fillText(icon, x + 28, y + 26);
+  ctx.font = '38px sans-serif';
+  ctx.fillText(icon, x + 30, midY + 1);
 
   ctx.fillStyle = cssVar('--text-dim', '#c7bce3');
-  ctx.font = '600 26px Inter, sans-serif';
-  ctx.fillText(label, x + 84, y + 30);
+  ctx.font = '600 23px Inter, sans-serif';
+  ctx.fillText(label, x + 84, midY - 19);
 
   ctx.fillStyle = cssVar('--text', '#f8f4ff');
-  ctx.font = '700 46px "Chakra Petch", sans-serif';
-  ctx.fillText(value, x + 84, y + 66);
+  ctx.font = '600 42px Fredoka, sans-serif';
+  ctx.fillText(value, x + 84, midY + 20);
+
+  ctx.textBaseline = 'alphabetic';
 }
 
 async function buildShareCanvas(stats){
@@ -2069,7 +1968,7 @@ async function buildShareCanvas(stats){
     try{ await document.fonts.ready; }catch(err){}
   }
 
-  const W = 1080, H = 1350;
+  const W = 1080, H = 1080;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
@@ -2098,13 +1997,14 @@ async function buildShareCanvas(stats){
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.fill();
   };
-  blob(120, 60, 420, mint);
-  blob(W - 100, 140, 380, blue);
-  blob(W / 2, H, 520, pink);
+  blob(110, 60, 400, mint);
+  blob(W - 90, 130, 360, blue);
+  blob(W / 2, H, 480, pink);
 
   // karta główna
-  const pad = 48;
-  roundRectPath(ctx, pad, pad, W - pad * 2, H - pad * 2, 28);
+  const pad = 60;
+  const ipad = 40;
+  roundRectPath(ctx, pad, pad, W - pad * 2, H - pad * 2, 26);
   ctx.fillStyle = panel2;
   ctx.fill();
   ctx.lineWidth = 2;
@@ -2112,155 +2012,106 @@ async function buildShareCanvas(stats){
   ctx.stroke();
 
   let cy = pad + 56;
-  const cx = pad + 44;
+  const cx = pad + ipad;
 
   // logo marki
-  const markSize = 72;
+  const markSize = 68;
   const markGrad = ctx.createLinearGradient(cx, cy - markSize/2, cx + markSize, cy + markSize/2);
   markGrad.addColorStop(0, pink);
   markGrad.addColorStop(.5, blue);
   markGrad.addColorStop(1, mint);
-  roundRectPath(ctx, cx, cy - markSize/2, markSize, markSize, 18);
+  roundRectPath(ctx, cx, cy - markSize/2, markSize, markSize, 17);
   ctx.fillStyle = markGrad;
   ctx.fill();
   ctx.fillStyle = cssVar('--btn-text', '#20182f');
-  ctx.font = '700 26px "Chakra Petch", sans-serif';
+  ctx.font = '600 24px Fredoka, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('PS', cx + markSize/2, cy + 3);
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
 
-  const titleX = cx + markSize + 24;
+  const titleX = cx + markSize + 22;
   ctx.fillStyle = text;
-  ctx.font = '700 40px "Chakra Petch", sans-serif';
-  ctx.fillText('Podsumowanie dnia', titleX, cy - 4);
+  ctx.font = '600 37px Fredoka, sans-serif';
+  ctx.fillText('Podsumowanie dnia', titleX, cy - 6);
 
   const dateLabel = new Date(stats.date + 'T00:00:00').toLocaleDateString('pl-PL', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
   ctx.fillStyle = textFaint;
-  ctx.font = '500 24px Inter, sans-serif';
-  ctx.fillText(dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1), titleX, cy + 30);
+  ctx.font = '500 23px Inter, sans-serif';
+  ctx.fillText(dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1), titleX, cy + 28);
 
-  cy += 90;
+  cy += 84;
   ctx.strokeStyle = border;
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(pad + 44, cy);
-  ctx.lineTo(W - pad - 44, cy);
+  ctx.moveTo(pad + ipad, cy);
+  ctx.lineTo(W - pad - ipad, cy);
   ctx.stroke();
 
-  // hero: łączny zysk dziś
-  cy += 60;
+  cy += 50;
   ctx.fillStyle = textDim;
-  ctx.font = '600 26px Inter, sans-serif';
-  ctx.fillText('ŁĄCZNY ZYSK DZIŚ', pad + 44, cy);
+  ctx.font = '600 25px Inter, sans-serif';
+  ctx.fillText('ŁĄCZNY ZYSK DZIŚ', pad + ipad, cy);
 
-  cy += 74;
+  cy += 66;
   ctx.fillStyle = blue;
-  ctx.font = '700 92px "Chakra Petch", sans-serif';
-  ctx.fillText(stats.hasAny ? formatShort(stats.totalToday) : '—', pad + 44, cy);
+  ctx.font = '600 80px Fredoka, sans-serif';
+  ctx.fillText(stats.hasAny ? formatShort(stats.totalToday) : '—', pad + ipad, cy);
 
   // dwa chipy: gemy / klucze
-  cy += 56;
-  const chipW = (W - pad * 2 - 44 * 2 - 24) / 2;
-  const chipH = 130;
-  drawStatChip(ctx, pad + 44, cy, chipW, chipH, {
+  cy += 46;
+  const chipW = (W - pad * 2 - ipad * 2 - 22) / 2;
+  const chipH = 112;
+  drawStatChip(ctx, pad + ipad, cy, chipW, chipH, {
     icon: '💎', label: 'ZYSK GEMÓW', color: mint,
     value: stats.hasGems ? formatShort(stats.gemsToday) : '—',
   });
-  drawStatChip(ctx, pad + 44 + chipW + 24, cy, chipW, chipH, {
+  drawStatChip(ctx, pad + ipad + chipW + 22, cy, chipW, chipH, {
     icon: '🔑', label: 'ZYSK KLUCZY', color: gold,
     value: stats.hasKeys ? formatShort(stats.keysToday) : '—',
   });
 
   // kont farmiło
-  cy += chipH + 24;
-  drawStatChip(ctx, pad + 44, cy, W - pad * 2 - 88, chipH, {
+  cy += chipH + 18;
+  drawStatChip(ctx, pad + ipad, cy, W - pad * 2 - ipad * 2, chipH, {
     icon: '👥', label: 'KONT FARMIŁO DZIŚ', color: pink,
     value: stats.farmedCount + ' / ' + stats.totalAccounts,
   });
 
   // średnia na konto
-  cy += chipH + 54;
+  cy += chipH + 42;
   ctx.fillStyle = textDim;
-  ctx.font = '600 26px Inter, sans-serif';
-  ctx.fillText('ŚREDNIO NA KONTO (spośród farmiących)', pad + 44, cy);
+  ctx.font = '600 25px Inter, sans-serif';
+  ctx.fillText('ŚREDNIO NA KONTO (spośród farmiących)', pad + ipad, cy);
 
-  cy += 30;
-  const avgChipW = (W - pad * 2 - 44 * 2 - 24 * 2) / 3;
-  const avgChipH = 116;
+  cy += 26;
+  const avgChipW = (W - pad * 2 - ipad * 2 - 20 * 2) / 3;
+  const avgChipH = 100;
   const avgY = cy;
-  drawStatChip(ctx, pad + 44, avgY, avgChipW, avgChipH, {
+  drawStatChip(ctx, pad + ipad, avgY, avgChipW, avgChipH, {
     icon: '💎', label: 'gemy', color: mint,
     value: stats.avgGems !== null ? formatShort(stats.avgGems) : '—',
   });
-  drawStatChip(ctx, pad + 44 + avgChipW + 24, avgY, avgChipW, avgChipH, {
+  drawStatChip(ctx, pad + ipad + avgChipW + 20, avgY, avgChipW, avgChipH, {
     icon: '🔑', label: 'klucze', color: gold,
     value: stats.avgKeys !== null ? formatShort(stats.avgKeys) : '—',
   });
-  drawStatChip(ctx, pad + 44 + (avgChipW + 24) * 2, avgY, avgChipW, avgChipH, {
+  drawStatChip(ctx, pad + ipad + (avgChipW + 20) * 2, avgY, avgChipW, avgChipH, {
     icon: 'Σ', label: 'razem', color: blue,
     value: stats.avgTotal !== null ? formatShort(stats.avgTotal) : '—',
   });
 
   // stopka
   ctx.fillStyle = textFaint;
-  ctx.font = '500 22px Inter, sans-serif';
-  ctx.fillText('Pet Simulator 99 · Tracker wydajności', pad + 44, H - pad - 30);
+  ctx.font = '500 21px Inter, sans-serif';
+  ctx.fillText('Pet Simulator 99 · Tracker wydajności', pad + ipad, H - pad - 68);
+
+  ctx.fillStyle = mint;
+  ctx.font = '600 24px Fredoka, sans-serif';
+  ctx.fillText('zmcpl.github.io — PS99 Farm Data', pad + ipad, H - pad - 34);
 
   return canvas;
-}
-
-let shareCurrentBlob = null;
-let shareCurrentUrl = null;
-
-function closeSharePopup(){
-  const overlay = document.getElementById('shareOverlay');
-  overlay.classList.remove('show');
-  if(shareCurrentUrl){
-    URL.revokeObjectURL(shareCurrentUrl);
-    shareCurrentUrl = null;
-  }
-  shareCurrentBlob = null;
-}
-
-async function copySharePopupImage(){
-  const copyBtn = document.getElementById('sharePopupCopy');
-  const label = copyBtn.querySelector('span');
-  const originalLabel = label ? label.textContent : '';
-  if(!shareCurrentBlob){
-    showToast('❌ Brak obrazka do skopiowania');
-    return;
-  }
-  try{
-    if(!navigator.clipboard || typeof ClipboardItem === 'undefined'){
-      throw new Error('Clipboard API niedostępne w tej przeglądarce');
-    }
-    await navigator.clipboard.write([
-      new ClipboardItem({ 'image/png': shareCurrentBlob })
-    ]);
-    showToast('Obraz skopiowany ✓ — wklej go na Discordzie (Ctrl+V)');
-    if(label) label.textContent = 'Skopiowano ✓';
-    setTimeout(() => { if(label) label.textContent = originalLabel; }, 1800);
-  }catch(err){
-    console.error('Błąd kopiowania obrazka:', err);
-    showToast('❌ Nie udało się skopiować — pobieram obrazek zamiast tego');
-    downloadShareImage();
-  }
-}
-
-function downloadShareImage(){
-  if(!shareCurrentBlob) return;
-  const stats = computeTodaySummary();
-  const filename = `ps99-podsumowanie-${stats.date}.png`;
-  const url = URL.createObjectURL(shareCurrentBlob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 
 async function shareTodaySummary(){
@@ -2276,18 +2127,32 @@ async function shareTodaySummary(){
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
     if(!blob) throw new Error('toBlob zwróciło pusty wynik');
 
-    if(shareCurrentUrl) URL.revokeObjectURL(shareCurrentUrl);
-    shareCurrentBlob = blob;
-    shareCurrentUrl = URL.createObjectURL(blob);
+    const filename = `ps99-podsumowanie-${stats.date}.png`;
+    const file = new File([blob], filename, { type: 'image/png' });
 
-    const img = document.getElementById('sharePopupImg');
-    img.src = shareCurrentUrl;
-
-    const overlay = document.getElementById('shareOverlay');
-    overlay.classList.add('show');
+    if(navigator.canShare && navigator.canShare({ files: [file] })){
+      await navigator.share({
+        files: [file],
+        title: 'PS99 — Podsumowanie dnia',
+        text: 'Moje dzisiejsze statystyki z Pet Simulator 99',
+      });
+      showToast('Udostępniono ✓');
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      showToast('Obrazek pobrany ✓');
+    }
   }catch(err){
-    console.error('Błąd generowania obrazka:', err);
-    showToast('❌ Nie udało się wygenerować obrazka');
+    if(err && err.name !== 'AbortError'){
+      console.error('Błąd generowania obrazka:', err);
+      showToast('❌ Nie udało się wygenerować obrazka');
+    }
   }finally{
     btn.disabled = false;
     if(label) label.textContent = originalLabel;
@@ -2591,7 +2456,6 @@ async function saveEntry(){
   setTimeout(() => { status.textContent = ''; }, 2500);
 }
 
-/* ===== Przestawialne panele (kolejność zapisywana w localStorage) ===== */
 const PANEL_ORDER_KEY = 'ps99_panel_order';
 
 function setupPanelReorder(){
@@ -2666,7 +2530,7 @@ function initPanelOrder(){
 
   const currentIds = panels.map(p => p.dataset.panelId).sort().join(',');
   const savedIds = [...saved].sort().join(',');
-  if(currentIds !== savedIds) return; // zbiór paneli się zmienił, ignorujemy zapisaną kolejność
+  if(currentIds !== savedIds) return;
 
   saved.forEach(id => { if(byId[id]) container.appendChild(byId[id]); });
 }
@@ -2683,7 +2547,6 @@ function updatePanelBtnStates(){
   });
 }
 
-/* ===== OCR (screenshot -> nick + saldo) ===== */
 let ocrFiles = { nick: null, bal: null };
 
 function ocrDropsConfig(){
@@ -2718,7 +2581,6 @@ function setupOcr(){
     });
   });
 
-  // Wklejenie obrazka gdziekolwiek (poza polami tekstowymi) trafia do pierwszego wolnego slotu
   document.addEventListener('paste', (e) => {
     const active = document.activeElement;
     if(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
@@ -2831,8 +2693,6 @@ function matchAccountFromText(text){
 }
 
 function extractBalanceShorthand(text){
-  // Szuka wzorców typu 398M / 1.62M / 23.7k / 262k — liczba z sufiksem k/m/b/t.
-  // Liczby bez sufiksu (np. ranga "40") są celowo pomijane.
   const re = /(\d+(?:[.,]\d+)?)\s*([kKmMbBtT])\b/g;
   let m, best = null, bestVal = -Infinity;
   while((m = re.exec(text))){
@@ -2922,22 +2782,6 @@ function setupEvents(){
   const shareBtn = document.getElementById('shareBtn');
   if(shareBtn) shareBtn.addEventListener('click', shareTodaySummary);
 
-  const shareOverlay = document.getElementById('shareOverlay');
-  const sharePopupCopy = document.getElementById('sharePopupCopy');
-  const sharePopupClose = document.getElementById('sharePopupClose');
-  const sharePopupCloseX = document.getElementById('sharePopupCloseX');
-  if(sharePopupCopy) sharePopupCopy.addEventListener('click', copySharePopupImage);
-  if(sharePopupClose) sharePopupClose.addEventListener('click', closeSharePopup);
-  if(sharePopupCloseX) sharePopupCloseX.addEventListener('click', closeSharePopup);
-  if(shareOverlay){
-    shareOverlay.addEventListener('click', (e) => {
-      if(e.target === shareOverlay) closeSharePopup();
-    });
-  }
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && shareOverlay && shareOverlay.classList.contains('show')) closeSharePopup();
-  });
-
   setupPanelReorder();
   setupOcr();
 
@@ -3009,7 +2853,7 @@ function setupEvents(){
 async function init(){
   initTheme();
   loadCachedKeyPrice();
-  setupEvents(); // podpinamy przyciski NAJPIERW, żeby UI działał nawet jeśli baza padnie
+  setupEvents();
 
   try{
     db = await openDB();
@@ -3060,5 +2904,6 @@ if('serviceWorker' in navigator){
 }
 </script>
 
-</body>
-</html>
+
+
+</body></html>
